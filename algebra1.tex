@@ -1,0 +1,300 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{mathtools}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{multicol} % Multiple columns
+
+% Setting information for document
+\author{Jonas Betzendahl}
+\date{\today}
+
+% For definitions
+\newtheorem{defi}{Definition}
+
+\begin{document}
+\newcommand{\menge}[2]{$\{\,{#1}\,\vert\,{#2}\,\}$}
+\parindent0pt
+
+\begin{center}
+
+\Huge \textbf{\underline{Algebra I}} \\\bigskip
+\normalsize\normalsize Stand vom \today\\
+
+\begin{multicols}{2}
+Dozent: Prof. Dr. Christopher Voll\\
+\texttt{voll@math.uni-bielefeld.de   }\bigskip
+
+Schreiberling: Jonas Betzendahl\\
+\texttt{jbetzend@techfak.uni-bielefeld.de}\bigskip
+\end{multicols}
+\end{center}
+
+\tableofcontents
+\newpage
+
+\setcounter{section}{-2} % Kompensieren für Organisatorisches und Einführung
+
+
+\section{Organisatorisches etc.}
+
+Dozent ist Prof. Dr. Christopher Voll\\
+\texttt{voll@math.uni-bielefeld.de}\\
+Büro: UHG V5-238, Sprechstunde noch im Flux\bigskip
+
+Vorlesungen finden an Montagen von 08.30 Uhr bis 10.00 Uhr und Mittwochs von 14.15 Uhr bis 15.45 Uhr statt.\bigskip
+
+Es wird darauf hingewiesen, dass die Übungen bei Dr. Doang in Englisch abgehalten werden.\bigskip
+
+Voraussetzung für die Zulassung zur Prüfung sind das Erreichen von mindestens 50 \% der Punkte und mindestens zwei Mal eine aktive Teilnahme an den Übungen (Vorrechnen) abgeleistet zu haben.\bigskip
+
+\begin{tabular}{rlc}
+\textbf{Bücher:} & Einführung in die Algebra (F. Lorenz, Spektrum)&\\
+        & Algebra 1 (S. Bosch, Springer)&\\
+        & Algebra (S. Lang, Springer)&\\
+        & Algebra (Hungerford)&\\
+        & Algebra (v.d. Waerden) & (Ein Klassiker)\\
+        & Algebra (E. Artin) &
+\end{tabular}\bigskip
+
+Übungszettel gibt es immer am Mittwoch der Woche n, bearbeiten werden müssen diese bis Mittwoch der Woche n+1 (Abgabe vor der Vorlesung im Postfach des Tutors), besprochen werden sie in der Woche n+2 in den Tutorien.
+         
+\section{Algebra - die Kunst, Gleichungen zu lösen (Einführung)}
+
+\underline{Lineare} Algebra:
+
+$a_{11} x_1 + a_{12} x_2 + \dots + a_{nm} x_m = b_1$\\
+$ \dots $\\
+$a_{n1} x_1 + a_{n2} x_2 + \dots + a_{nm} x_m = b_n$\\
+
+Alle Fragen können in Form $a_{ij}, b_i \in \mathcal{K}$ beantwortet werden.
+
+Verallgemeinerung: $a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n = 0$ (polynom. Gleichung von Grad $n (a_n \neq 0)$.
+
+\glqq Struktur\grqq\ der Lösungen solcher Gleichungen treibt Menschen seit Jahrtausenden um.
+
+Spezialfall: Quadratische Gleichungen
+
+$$ x^2 + bx + c = 0 \Leftrightarrow \frac{-b \pm \sqrt{b^2 - 4c}}{21}$$
+
+durch Wurzeln lösbar. Kubische Gleichungen:
+
+$$ x^3 + b x^2 + cx + d = 0 \Leftrightarrow \dots $$
+
+ebenfalls durch Wurzeln lösbar. Im 16. Jahrhundert wurde bekannt, dass auch quartische Gleichungen $(n = 4)$ durch Wurzelausdrücke lösbar sind.
+
+Was nicht ins Weltbild des 16. Jahrhundert passte: Im 19. Jahrhundert zeigte Abel: Nicht jede quintische Gleichung $(n = 5)$ kann durch Wurzelausdrücke gelöst werden.
+
+Galois: Lösungen von Polynomen sind nicht einfach Mengen ohne Struktur sondern Mengen \emph{mit} Struktur ($\rightarrow$ Gruppentheorie). Auflösbarkeit von $f = 0$ durch Wurzel $\Rightarrow$ Galois-Gruppe($f$) auflösbar.
+
+Ziel der Vorlesung: Einführung in die Sprache der modernen Algebra, sowohl durch Anerkennen der Theorie als auch durch das Praktizieren.
+
+\section{Fundamente der Gruppentheorie}
+
+\subsection{Monoide \& Gruppen}
+
+\begin{defi}
+	Ein \emph{Monoid} ist eine Menge $M$ zusammen mit einer Verknüpfung $\cdot : M \times M \to M$,
+	die die Eigenschaften erfüllt:
+	\begin{itemize}
+		\item \emph{\texttt{(ASS)}} $\forall a,b,c \in M: (a \cdot b) \cdot c = a \cdot (b \cdot c)$ (Assoziativität)
+		\item \emph{\texttt{(NEU)}} $\exists\, e = e_M \in M \; \forall a \in M,\, e \cdot a = a = a \cdot e$ (Existenz
+	eines neutralen Elementes)
+	\end{itemize} 
+\end{defi}
+
+\textbf{Bemerkung:} Die Notation ist oft einfach nur \glqq $ab$\grqq\ statt \glqq $a \cdot b$\grqq , oft auch bei mehreren Monoiden gleichzeitig. Ausgelassen wird immer die passende Verknüpfung. Es wird auch die Schreibweise $\prod_{i=1}^{n} a_i$ für den Ausdruck $a_1 \cdot a_2 \cdot \dots a_n,\; a_i \in M$ verwendet. Weiterhin gelten per Konvention: $\prod_{i=1}^{n} a_i = e$ für $n \leq 0$ und $a^m = \underbrace{a \cdot a \cdot \dots a}_{\text{m-mal, } m \in \mathbb{N}}$.
+
+\textbf{Behauptung:} $e \in M$ ist eindeutig (siehe unten).\bigskip
+
+Sei $a \in M$. Wir nennen $b \in M$ \emph{invers zu} $a$ falls $a \cdot b = b \cdot a = e$ gilt. Falls (!) solch ein $b$ existiert, ist es eindeutig (siehe unten). In diesem Fall ist die Notation oft $a^{-1}$ für $b$: $a \cdot a^{-1} = a^{-1} \cdot a = e$.\bigskip
+
+\begin{multicols}{2}
+
+\textbf{Übungsaufgabe:} $e \in M$ ist eindeutig.\bigskip
+
+Angenommen, es gäbe ein zweites neutrales Element $e'$ mit $e \neq e'$. Dann würde gelten $e = e \cdot e' = e' \rightarrow \bot \quad \square$
+
+\columnbreak
+
+\textbf{Übungsaufgabe:} $a^{-1} \in M$ ist eindeutig.\bigskip
+
+Angenommen, zu einem $a \in M$ gäbe es zwei inverse Elemente $a', a''$ mit $a' \neq a''$. Dann gilt $a' \cdot a \cdot a''= a' \cdot e = a'$ als auch $(a' \cdot a) \cdot a'' = e \cdot a'' = a''$. Es folgt $a' = a'' \rightarrow \bot \qquad \square$ 
+
+\end{multicols}
+
+\begin{defi} Eine \emph{Gruppe} ist ein Monoid $(G, \cdot)$ mit der folgenden Eigenschaft: 
+
+\begin{center}
+\emph{\texttt{(INV)}} $\forall a \in G\; \exists\, a^{-1} \in G$ sodass $a \cdot a^{-1} = a^{-1} \cdot a = e$ (Existenz eines inversen Elements)
+\end{center}
+$G$ heißt \emph{kommutativ} oder synonym dazu \emph{abelsch} falls folgende Eigenschaft gilt:
+\begin{center}
+\emph{\texttt{(KOM)}} $\forall a, b \in G: a \cdot b = b \cdot a$ (Kommutativität)
+\end{center}
+\end{defi}
+
+Vektorräume zum Beispiel sind abelsche Gruppen, die interessante Struktur ist hier aber nicht die abelsche Eigenschaft sondern die Multiplikation mit Skalaren, die sich gut mit der Gruppenstruktur verträgt.\bigskip
+
+% Porträt: N.H. Abel 1902-1829 (Norweger).
+
+Die \emph{Ordnung} einer Gruppe ist $(G, \cdot)$ ist die Kardinalität $\vert G \vert$ von $G$.\bigskip
+
+Konvention: \glqq Gruppe $G$\grqq , falls $\cdot$ klar ist. Ist $G$ abelsch, so schreibt man oft $+$ für $\cdot$ (die Monoidverknüpfung) und man redet von \glqq additiver Schreibweise\grqq\ im Gegensatz zu \glqq multiplikativer Schreibweise\grqq . Bei additiver Schreibweise schreibt man oft $0$ für $e$, bzw. bei multiplikativer Schreibweise $1$.\bigskip
+
+\textbf{Beispiele 1.3:}
+\begin{enumerate}
+	\item $(\mathbb{Z}, +), (\mathbb{Q}, +), (\mathbb{R}, +), (\mathbb{C}, +)$ sind abelsche Gruppen. Ebenso $(\mathcal{K}, +)$ wenn $(\mathcal{K}, +, \cdot)$ ein Körper ist.
+	\item $\mathbb{Q}^* = \mathbb{Q} \setminus \{0\}$, $\mathbb{R}^*, \mathbb{C}^*, \mathcal{K}^* = \mathcal{K} \setminus \{0\}$, mit $1 = e$ als Einselemnent, sind abelsche Gruppen
+	\item $GL_n(R) = \{ x \in Mat_n(R) \vert \text{det}(x) \neq 0\}$ mit $R$ beliebiger Körper, invertierbare Matrizen über $R$, $SL_n(R)  = \{ x \in GL_n(R) \vert \text{det }x = 1 \in R \}$, ($1_n = $ Einheitsmatrix $)$ sind Gruppen bezüglich der Matrixmultiplikation, mit Einselement jeweils $1_n$, allerdings für $n > 1$ \underline{nicht} abelsch.
+	\item $\mathbb{N}_0 = \mathbb{N} \cup 0$, $\mathbb{N} = \{1,2,3,\dots\}$. Sowohl $(\mathbb{N}_0, +)$ als auch $(\mathbb{N}, \cdot)$ sind Monoide aber keine Gruppen $(2x = 1$ unlösbar$)$.
+	\item $Mat_n(R)$ ($R$ Körper) ist ein Monoid $(\cdot = $ Multiplikation, $ e = 1_n)$.
+	\item $A \in Mat_n(\mathbb{Z}), L_A = \{ x \in {\mathbb{N}_0}^n \vert xA = 0\}$ ist ein Monoid mit Nullvektor als Einselement.
+
+Notation: $R$ Ring, dann $R^n = \{(r_1, \dots, r_n) \vert r_i \in R\}$ (n-Tupel).
+	\item Symmetrische Gruppen: Sei $X$ beliebige Menge. $Sym(X) \coloneqq \{ f : X \to X \vert f$ Bijektion $\}$ ist eine Gruppe mit Verknüpfung von Abbildungen als \glqq Multiplikation\grqq . $(f,g \in Sym(X): f \circ g: X \to X$ Bijektion!$)$, mit $id : X \to X$ als Einselement.
+	
+	
+Rekapitulation der Leibnitz-Formel: $K$- Körper: $a_{ij} = A \in
+Mat_n(K)$. 
+
+$$\det(A) = \sum_{\sigma \in S_n} sgn(\sigma)
+\prod_{i = 1}^{n} a_{i \sigma(i)}.$$
+
+% TODO: kleiner Exkurs Leibnitz-Formel.
+
+Wichtiger Spezialfall: $X = \{ 1,2, \dots, n \}, n \in \mathbb{N}$. Setze $S_n = Sym(X)$\glqq\ , symmetrische Gruppe vom Grad $n$\grqq . (Dies erlaubt es, dass jede endliche Gruppe als Unterobjekt verstanden werden kann) Ordnung $\vert S_n \vert = n ! $. Nicht abelsch falls $n > 2$.\bigskip
+
+$f \in S_n:$
+
+Matrixschreibweise $\begin{pmatrix}
+1 & 2 & \dots & n\\
+f(1) & f(2) & \dots & f(n)
+\end{pmatrix}$ 
+
+oder Zykelschreibweise: $\left(1, f(1), f(f(1)) \dots \right),\; (a, f(a), f^2(a) \dots), \underbrace{(b, f(b), f^2(b) \dots)}_{\text{\glqq Zykel\grqq}}$ für $a \notin$ \menge{f^n(1)}{n = \{1,2,3,\dots\}} $\subseteq \{1,\dots,n\}$ und $b \notin$ \menge{f^n(1)}{dots} $\cup$ \menge{f^n(a)}{n \in \mathbb{N}}
+
+Konvention: Zykel der Länge 1 weg. \bigskip
+
+$\begin{pmatrix}
+1 & 2 & 3\\
+1 & 2 & 3
+\end{pmatrix} \Leftrightarrow (1)(2)(3)$ (A)
+
+$\begin{pmatrix}
+1 & 2 & 3\\
+2 & 1 & 3
+\end{pmatrix} \Leftrightarrow (12)(3)$ (B)
+
+$\begin{pmatrix}
+1 & 2 & 3\\
+1 & 3 & 2 
+\end{pmatrix} \Leftrightarrow (123)$ (C)
+
+\dots
+
+\item Sei $X$ eine beliebige Menge und $G$ eine Gruppe. Dann ist $G^X \coloneqq Abb(X,G) = \{q : X \to G\}$ mit der folgenden Verknüpfung eine Gruppe: 
+
+Gegeben $\varphi, \psi \in G^X$, definiere für $x \in X \; \phi \circ \psi \coloneqq \phi(x) \cdot \psi(x) \in G$ Dies nennt sich \glqq komponentenweise Multiplikation\grqq .
+
+\item Sei $X$ eine beliebige Menge, $\{G_x\}_{x \in X}$, Familie von Gruppen. Dann ist $\prod_{x \in X} G_x =$ \menge{(g_x)_{x \in X}}{\forall x : g_x \in G_x} mit der Verknüpfung $(g_x)_{x \in X} \cdot (h_x)_{x \in X} \coloneqq (g_x \cdot h_x)_{x \in X}$ -- Produkt der Gruppen $G_x, x \in X$.
+\end{enumerate}\bigskip
+
+\subsection{Untergruppen und Homomorphismen}
+
+\begin{defi} Sei $G$ ein Monoid, $H \subseteqq G$ Teilmenge. $H$ heißt \emph{Untermonoid} von G, falls
+\begin{itemize}
+\item $e \in H$
+\item $a,b \in H \Rightarrow ab \in H$
+\end{itemize}
+
+Ist $G$ eine Gruppe, so heißt $H$ \emph{Untergruppe}, falls zusätzlich
+\begin{itemize}
+\item $a \in H \Rightarrow a^{-1} \in H$
+\end{itemize}.
+\end{defi} Schreibe gegebenenfalls \glqq $H \leqslant G$\grqq\ oder \glqq $H < G$\grqq. Schreibe \glqq $H \lneq G$\grqq\ für Untergruppen $H \neq G$. \bigskip
+
+\textbf{Beispiel (1.5):} \begin{enumerate}
+\item $G$ Gruppe $\Rightarrow H = G \leqslant G$, $\{e\} = G$ heißen \emph{triviale Untergruppen}.
+\item $G = (\mathbb{Z}, +), m \in \mathbb{Z}$. $H = m \mathbb{Z} =$ \menge{mx}{x \in \mathbb{Z}} $\leqslant \mathbb{Z}$.
+
+	\begin{enumerate}
+		\item @1: $0 = m0 \in H$
+		\item @2: $mx (\in H) + my (\in H) = m (x + y) \in H$, $x,y \in \mathbb{Z}$
+		\item @3: Inverses von $mx$ ist $-mx (mx + (-mx) = 0 = e_\mathbb{Z})$.
+	\end{enumerate}
+
+Tatsache (Beweis später): \underline{Jede} Untergruppe von $Z$ ist von der Form $m Z$. $\mathbb{Z} = (-1)Z = 1Z, 0 \mathbb{Z} = e_\mathbb{Z}$. Schreibe $(m) = m \mathbb{Z}$.
+
+Echte Untergruppen: $\{A,B\}, \{A,D,E\}, \{A,C\}, \{A,F\}$.
+
+\item $G$ Gruppe, $g \in G$, $H \coloneqq < g > \coloneqq$ \menge{g^n}{n \in \mathbb{Z}} $\leqslant G$ (!!). %ausruf über leqslant
+
+\begin{enumerate}
+\item % checkmark
+\item $g^n \cdot g^m = g^{n + m}$ %checkmark
+\item $(g^n)^{-1} = g^{-n}$ % checkmark
+\end{enumerate}
+
+\glqq Die von $g$ erzeugte (zyklische) Untergruppe\grqq\ $=$ die kleinste Untergruppe von $G$, die $g$ enthält (braucht $g$, $g^2$, $g^3$, \dots , $g^{-1}$, \dots).
+
+\item $SL_n(K) \leqslant GL_n(K)$, $K$ Körper
+
+LHS = \menge{x \in Mat_n(K)}{det(x) = 1}
+RHS = \menge{x \in Mat_n(K)}{det(x) \neq 0}
+
+Für alle \glqq vernünftigen\grqq\ Körper und alle $n > 1$ ist das eine nicht-triviale Teilmenge.  
+\end{enumerate}
+
+\begin{defi} (1.6) Seien $G, G'$ Monoide, mit Einselementen $e \in G$ und $e' \in G'$. Ein \emph{Monoidhomomorphismus} ist eine Abbildung $\varphi : G \to G'$, derart, dass \begin{itemize}
+\item $\varphi(e) = e'$
+\item $\forall a, b \in G: \varphi(a \cdot b) = \varphi (a) \cdot \varphi (b)$.
+\end{itemize}
+Sind $G, G'$ Gruppen, spricht man von einem \emph{Gruppenhomomorphismus} (oder oft einfach nur Homomorphismus).
+\end{defi}
+
+\textbf{Bemerkung:} Sei $\varphi : G \to G'$ ein Gruppenhomomorphismus, dann gilt
+
+(Übungsaufgaben:)
+\begin{enumerate}
+\item $\forall a \in G: (\varphi (a))^{-1} = \varphi (a^{-1})$. Nach der zweiten Eigenschaft von oben gilt $\varphi(a^{-1}) \cdot \varphi(a) = \varphi(a^{-1} \cdot a) = \varphi(e) = e$
+
+\item $\ker (\varphi) \coloneqq$ \menge{g \in G}{\varphi(g) = e'} $\leqslant G$.
+
+\item $img (\varphi) =$  \menge{\varphi(g)}{g \in G}  $\leqslant G'$
+\end{enumerate} 
+
+\begin{defi} (1.7) Ein Gruppenhomomorphismus $\varphi : G \to G'$ heißt
+\begin{itemize}
+	\item \emph{Monomorphismus}, falls er injektiv ist. $(\Leftrightarrow \ker (\varphi) = \{e\})$
+	\item \emph{Epimorphismus}, falls er surjektiv ist. $(\Leftrightarrow im(\varphi) = G')$
+	\item \emph{Isomorphismus}, falls er Epi. \& Mono ist.
+	\item \emph{Endomorphismus} von $G$, falls $G' = G$
+	\item \emph{Automorphismus} von $G$, falls $G' = G$ und $\varphi$ Isomorphismus.
+\end{itemize}
+\end{defi}
+
+Sprechweise: Gegeben ein Isomorphismus heißen $G$ und $G'$ \emph{isomorph zu einander}. Man schreibt $G \cong G'$. Beispiel: $G = \mathbb{Z}, H = 2 \mathbb{Z} \leqslant G$.
+
+Behauptung: $G \to G$, $g \mapsto 2g (= g + g)$ ist Isomorphismus. Also schreibt man $\mathbb{Z} \cong 2\mathbb{Z}$. Isomorphie ist transitiv $(G \cong G'), (G' \cong G'') \Rightarrow G \cong G''$.\bigskip
+
+\textbf{Beispiele (1.8):}
+\begin{enumerate}
+\item Sei $G$ ein Monoid, $g \in G$, dann ist $\varphi : \mathbb{N}_0 \to G, n \mapsto g^n$ ein Monoidhomomorphismus. (Übungsaufgabe!) $\varphi$ ist sozusagen bestimmt durch $\varphi(1)$. 
+
+\item Ist $G$ sogar eine Gruppe, dann bestimmt $n \mapsto g^n$ einen Gruppenhomomorphismus: $\varphi : \mathbb{Z} \to G$. $im(\varphi) = $ \menge{g^n}{n \in Z} $= < g >$.
+
+Übungsaufgabe: Wenn $\vert <g> \vert = \infty$, dann ist $\phi : \mathbb{Z} \to im(\varphi)$ ein Isomorphismus.
+
+\item Sei $G$ eine Gruppe, $g \in G$. Dann ist $\psi_g \coloneqq G \to G, h \mapsto g h g^{-1}$ ein Gruppen\underline{automorphismus} (Übungsaufgabe).
+
+$\psi_g(h \cdot h') = g h h' g^{-1} = gheh'g^{-1} = (ghg^{-1})(gh'g^{-1}) = \psi_g(h) \psi_g(h')$. Dies nennt sich \glqq Konjugation mit $g$\grqq .
+\end{enumerate}
+
+\end{document}
