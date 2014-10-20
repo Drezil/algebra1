@@ -31,7 +31,7 @@
 Dozent: Prof. Dr. Christopher Voll\\
 \texttt{voll@math.uni-bielefeld.de   }\bigskip
 
-Schreiberling: Jonas Betzendahl\\
+Autor: Jonas Betzendahl\\
 \texttt{jbetzend@techfak.uni-bielefeld.de}\bigskip
 \end{multicols}
 \end{center}
@@ -40,7 +40,6 @@ Schreiberling: Jonas Betzendahl\\
 \newpage
 
 \setcounter{section}{-2} % Kompensieren für Organisatorisches und Einführung
-
 
 \section{Organisatorisches etc.}
 
@@ -95,6 +94,7 @@ Galois: Lösungen von Polynomen sind nicht einfach Mengen ohne Struktur sondern 
 
 Ziel der Vorlesung: Einführung in die Sprache der modernen Algebra, sowohl durch Anerkennen der Theorie als auch durch das Praktizieren.
 
+\newpage
 \section{Fundamente der Gruppentheorie}
 
 \subsection{Monoide \& Gruppen}
@@ -114,20 +114,6 @@ Ziel der Vorlesung: Einführung in die Sprache der modernen Algebra, sowohl durc
 \textbf{Behauptung:} $e \in M$ ist eindeutig (siehe unten).\bigskip
 
 Sei $a \in M$. Wir nennen $b \in M$ \emph{invers zu} $a$ falls $a \cdot b = b \cdot a = e$ gilt. Falls (!) solch ein $b$ existiert, ist es eindeutig (siehe unten). In diesem Fall ist die Notation oft $a^{-1}$ für $b$: $a \cdot a^{-1} = a^{-1} \cdot a = e$.\bigskip
-
-\begin{multicols}{2}
-
-\textbf{Übungsaufgabe:} $e \in M$ ist eindeutig.\bigskip
-
-Angenommen, es gäbe ein zweites neutrales Element $e'$ mit $e \neq e'$. Dann würde gelten $e = e \cdot e' = e' \rightarrow \bot \quad \square$
-
-\columnbreak
-
-\textbf{Übungsaufgabe:} $a^{-1} \in M$ ist eindeutig.\bigskip
-
-Angenommen, zu einem $a \in M$ gäbe es zwei inverse Elemente $a', a''$ mit $a' \neq a''$. Dann gilt $a' \cdot a \cdot a''= a' \cdot e = a'$ als auch $(a' \cdot a) \cdot a'' = e \cdot a'' = a''$. Es folgt $a' = a'' \rightarrow \bot \qquad \square$ 
-
-\end{multicols}
 
 \begin{defi} Eine \emph{Gruppe} ist ein Monoid $(G, \cdot)$ mit der folgenden Eigenschaft: 
 
@@ -267,16 +253,16 @@ Sind $G, G'$ Gruppen, spricht man von einem \emph{Gruppenhomomorphismus} (oder o
 
 \item $\ker (\varphi) \coloneqq$ \menge{g \in G}{\varphi(g) = e'} $\leqslant G$.
 
-\item $img (\varphi) =$  \menge{\varphi(g)}{g \in G}  $\leqslant G'$
+\item $img (\varphi) =$ \menge{\varphi(g)}{g \in G}  $\leqslant G'$
 \end{enumerate} 
 
 \begin{defi} (1.7) Ein Gruppenhomomorphismus $\varphi : G \to G'$ heißt
 \begin{itemize}
-	\item \emph{Monomorphismus}, falls er injektiv ist. $(\Leftrightarrow \ker (\varphi) = \{e\})$
-	\item \emph{Epimorphismus}, falls er surjektiv ist. $(\Leftrightarrow im(\varphi) = G')$
-	\item \emph{Isomorphismus}, falls er Epi. \& Mono ist.
-	\item \emph{Endomorphismus} von $G$, falls $G' = G$
-	\item \emph{Automorphismus} von $G$, falls $G' = G$ und $\varphi$ Isomorphismus.
+	\item \emph{Monomorphismus}, falls er injektiv ist. $(\Leftrightarrow \ker (\varphi) = \{e\})$,
+	\item \emph{Epimorphismus}, falls er surjektiv ist. $(\Leftrightarrow im(\varphi) = G')$,
+	\item \emph{Isomorphismus}, falls er sowohl ein Epimorphismus als auch ein Monomorphismus ist,
+	\item \emph{Endomorphismus} von $G$, falls $G' = G$,
+	\item \emph{Automorphismus} von $G$, falls $G' = G$ und $\varphi$ ein Isomorphismus ist.
 \end{itemize}
 \end{defi}
 
@@ -292,9 +278,119 @@ Behauptung: $G \to G$, $g \mapsto 2g (= g + g)$ ist Isomorphismus. Also schreibt
 
 Übungsaufgabe: Wenn $\vert <g> \vert = \infty$, dann ist $\phi : \mathbb{Z} \to im(\varphi)$ ein Isomorphismus.
 
-\item Sei $G$ eine Gruppe, $g \in G$. Dann ist $\psi_g \coloneqq G \to G, h \mapsto g h g^{-1}$ ein Gruppen\underline{automorphismus} (Übungsaufgabe).
+\item Sei $G$ eine Gruppe, $g \in G$. Dann ist $\psi_g \coloneqq G \to G, h \mapsto g h g^{-1}$ ein Gruppen\underline{automorphismus} (Übungsaufgabe: Checken und was ist das Inverse zu $\psi_g$?).
 
 $\psi_g(h \cdot h') = g h h' g^{-1} = gheh'g^{-1} = (ghg^{-1})(gh'g^{-1}) = \psi_g(h) \psi_g(h')$. Dies nennt sich \glqq Konjugation mit $g$\grqq .
+
+Prüfen: $Aut(G) =$ \menge{\psi : G \to G}{ \phi Automorphismus} bildet Gruppe unter Verknüpfung.
+
+\menge{\phi_g}{g \in G} $< Aut(G)$ = "Innere Automorphismen von $G$".
 \end{enumerate}
+
+\subsection{Nebenklassen}
+
+\begin{defi}
+Sei $G$ eine Gruppe, $H \leqslant G$. Eine Menge der folgenden Form: $gH = $\menge{g \cdot H}{h \in H}  $\subseteq G, g \in G$ heißt \emph{Linksnebenklasse} (LNK) (left coset) von $H$ in $G$.
+
+Dementsprechend: $Hg = $ \menge{h \cdot g}{h \in H} heißt Rechtsnebenklasse (RNK) von $H$ in $G$.
+\end{defi}
+
+Nebenklassen \glqq pflastern\grqq\ die Gruppe.
+
+\textbf{Lemma (1.10):} Seien $gH$ und $g'H$, mit $g, g' \in H$ Linksnebenklassen von $H \leqslant G$. Dann sind Äquivalent:
+\begin{enumerate}
+\item $gH = g'H$
+\item $gH \cap g'H \neq \varnothing$
+\item $g \in g'H$
+\item $g'^{-1} g \in H$
+\end{enumerate}
+
+\textbf{Beweis:}
+\begin{enumerate}
+\item klar: $gH \ni ge = g \Rightarrow gH \neq \varnothing$
+\item $gh \in g'H$ für ein $h \in H$. $\Rightarrow \exists h' \in H: gh = g' h' \Leftrightarrow g \underbrace{h h^{-1}}_{e} = g'\underbrace{h'h^{-1}}_{\in H} \Leftrightarrow g \in g'H$.
+\item $g \in g'H \Leftrightarrow \exists h \in H: g = g'h \Rightarrow (g')^{-1} \cdot g = h \in H.$
+\item $(g')^{-1} g \in H$, etwa $(g')^{-1}g = h \in H \Rightarrow g = g' \cdot h$. $gH = $\menge{g\tilde{h}}{\tilde{h} \in H} $=$ \menge{g' \cdot (h \tilde{h})}{\tilde{h}} $= g'H\qquad\square$
+\end{enumerate}
+
+\textbf{Satz (1.11):} Je zwei Linksnebenklassen von $H$ in $G$ sind in Bijektion zueinander. Verschiedene LNK sind disjunkt. Insbesondere ist $G$ disjunkte Vereiningung der Linksnebenklassen von $H$ in $G$.
+\textbf{Beweis:} @Bijektion: Gegeben $gH$, $g'H$, $g, g' \in G$. \\
+$gH \underbrace{\cong}_{(bijektiv)} H$. ($gH \cong eH = H \cong g'H$)
+
+Es reicht zu zeigen: $H \to gH, h \mapsto gh$ ist Bijektiv. $gh = gh' \leftrightarrow g^{-1}gh = g^{-1}gh' \leftrightarrow h = h'$. $\square$
+
+\begin{defi} (1.12)
+Sei $G$ eine Gruppe, $H \leqslant G$. Schreibe $G / H = $ \menge{gH}{g \in G} für die Menge der Linksnebenklassen von $H$ in $G$ und $H \ G$ = \menge{Hg}{g \in H} für die Menge der Rechtsnebenklassen von $H$ in $G$.
+\end{defi}
+
+\textbf{Bemerkung:} $G / H \to H \ G, gH \mapsto Hg$ ist Bijektion.
+
+ÜA: $(gH = g'H \Leftrightarrow$ %Lemma 1.10 (4).
+$g \cdot (g')^{-1} \in H \Leftrightarrow Hg = Hg')$
+
+\begin{defi} (1.13)
+Setze $\vert G : H\vert (= [G:H] = (G:H)) = \vert G / A\vert =$ %siehe Bemerkung
+$= \vert H \ G\vert$ genannt der \emph{Index} von $H$ in $G$. 
+\end{defi}
+
+\textbf{Informell:} $\vert G : H\vert$ \glqq inverse Dichte\grqq\ von $H$ in $G$. $\frac{1}{\vert G : H\vert} = $\glqq $ P(g \in H)$\grqq .
+
+z.B.: $G = \mathbb{Z}, H = m \mathbb{Z}$. $\rightarrow \vert G : H\vert
+ = m$.
+ 
+\textbf{Beispiel (1.14) :} \begin{enumerate}
+\item $H = \{ e \}: G/H \cong H \ G \cong G$ %congs sind Bijektionen
+$\Rightarrow \vert G : H\vert = \vert G \vert$.
+\item $H = G: G/G = G\\G = \{\cdot\}$ % einelementige Menge
+$\Rightarrow \vert G : G\vert = 1$.
+\item Drittes Beispiel siehe oben.
+\end{enumerate}
+
+\textbf{Korrollar (1.5) (Satz von Lagrange):} Sei $G$ eine \underline{endliche} Gruppe, $H \leqslant$. Dann gilt $\vert G\vert = \vert H \vert \cdot \vert G : H \vert$. ($\frac{\vert G\vert}{\vert H \vert} = \vert G : H \vert$).\\ (1.16) Insbesondere teilt $\vert H \vert$ stets $\vert G\vert$!
+
+\textbf{Achtung:} $\exists$ endliche Gruppen $G$ mit der Eigenschaft, dass einige Teiler ihrer Ordnung von von Untergruppen $H$ realisiert werden. (ÜA: Eleganter formulieren.)
+
+z.B: Ist $p$ eine Primzahl, $\vert G\vert = p^e, e \in \mathbb{N}_0$, so heißt $G$ \emph{p-Gruppe.} Aus Langrange folgt: $\forall H \leqslant G, H$ ist p-Gruppe.
+
+\subsection{Normalteiler \& Isomorphiesätze}
+
+\begin{defi}(1.17)
+Sei $G$ eine Gruppe, $H \leqslant G$ heißt \emph{Normalteiler} (oder synonym dazu: normale Untergruppe), wenn $\forall g \in G\; gH = Hg.$
+Gegebenenfalls heißt $gH$ die von $g$ bestimmte Nebenklasse von $H$ in $G$. Gegebenenfalls schreibe $(H \trianglelefteq G) \Leftrightarrow H \triangleleft G$.
+\end{defi}
+
+\textbf{Bemerkung:} $g, H, G$ wie in (1.17): $gH = Hg \Leftrightarrow g H g^{-1} = H$.\\
+Um zu verifizieren, ob $H \leqslant G$ ein Normalteiler ist, reicht es zu testen, ob $\forall g. g H g^{-1} \subseteq H$ (*).
+
+In der Tat. Angenommen (*) gilt, so gilt auch $\forall g \in G. gH \subseteq Hg$. Aber es gilt $g^{-1}H{g^{-1}}^{-1} = g^{-1}Hg \subseteq H, $ d.h. $Hg \subseteq gH$
+
+$\Rightarrow gH = Hg$ % Das folgt aus den Zweien oben.
+
+\textbf{Beispiel (1.18):}\begin{enumerate}
+\item $\{ e \} \triangleleft G$. ($ \forall g: g \{ e \} = \{ e \} g = \{ g \cdot e \} = \{ g \}$). Ebenso: $G \triangleleft G: gG = G = Gg$.
+\item Ist $G$ abelsch, ist \underline{jede} Untergruppe Normalteiler. 
+\item $G = S_3$. Die Untergruppen $H$ von $S_3$ die von $\{e\}$ und $S_3$ selbst verschieden sind, sind $\{<(12)>, <(13)>, <(23)>, <(123)>\}$ (Untergruppen der Ordnung 2,2,2 und 3. Lagrange sagt dass es keine anderen geben kann.)
+
+Übungsaufgabe: Von diesen 4 Untergruppen ist nur $<(123)>$ normal.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Übungsaufgaben}
+
+\subsection{13/10/2014}
+
+\textbf{Eindeutigkeit des Neutralen:} Sei $M$ ein Monoid. Zeige, dass $e \in M$ eindeutig ist.\bigskip
+
+Angenommen, es gäbe ein zweites neutrales Element $e'$ mit $e \neq e'$. Dann würde gelten $e = e \cdot e' = e' \rightarrow \bot \quad \square$\bigskip
+
+\textbf{Eindeutigkeit der Inversen:} Sei $M$ ein Monoid. Zeige, dass $a^{-1} \in M$, falls es existiert, eindeutig ist.\bigskip
+
+Angenommen, zu einem $a \in M$ gäbe es zwei inverse Elemente $a', a''$ mit $a' \neq a''$. Dann gilt $a' \cdot a \cdot a''= a' \cdot e = a'$ als auch $(a' \cdot a) \cdot a'' = e \cdot a'' = a''$. Es folgt $a' = a'' \rightarrow \bot \qquad \square$
+
+\subsection{15/10/2014}
+
+\textbf{\underline{Aufgabe:}} Sei $G$ eine Gruppe mit $g \in G$. Zeige: $\psi_g \coloneqq G \to G, h \mapsto g h g^{-1}$ ist ein Gruppenautomorphismus.
 
 \end{document}
