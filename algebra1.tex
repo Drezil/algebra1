@@ -17,6 +17,8 @@
 
 % For definitions
 \newtheorem{defi}{Definition}
+\newtheorem{satz}{Satz}
+\newtheorem{korr}{Korrolar}
 
 \begin{document}
 \newcommand{\menge}[2]{$\{\,{#1}\,\vert\,{#2}\,\}$}
@@ -370,9 +372,89 @@ $\Rightarrow gH = Hg$ % Das folgt aus den Zweien oben.
 \item $\{ e \} \triangleleft G$. ($ \forall g: g \{ e \} = \{ e \} g = \{ g \cdot e \} = \{ g \}$). Ebenso: $G \triangleleft G: gG = G = Gg$.
 \item Ist $G$ abelsch, ist \underline{jede} Untergruppe Normalteiler. 
 \item $G = S_3$. Die Untergruppen $H$ von $S_3$ die von $\{e\}$ und $S_3$ selbst verschieden sind, sind $\{<(12)>, <(13)>, <(23)>, <(123)>\}$ (Untergruppen der Ordnung 2,2,2 und 3. Lagrange sagt dass es keine anderen geben kann.)
-
 Übungsaufgabe: Von diesen 4 Untergruppen ist nur $<(123)>$ normal.
+\item Ist $\varphi : G \rightarrow G'$ Gruppenhomomorphismus, dann ist $ker(\varphi) = \lbrace g \in G | \varphi(g) = e_{G'} \rbrace \lhd G$.\\
+      Z.z. $\forall g \in G . g(ker \varphi) g^{-1} \subseteq ker \varphi$. Sei $g k g^{-1}$ mit $k \in ker \varphi$. Reicht zu zeigen: $\varphi(gkg^{-1}) = e_{G'}$. Aber 
+      \begin{eqnarray*}
+\varphi(gkg^{-1} & = & \varphi(g) \varphi(h) \underbrace{\varphi(g^{-1})}_{= \varphi(g)^{-1}}\\
+              & = & \varphi(g) e_{G'} \varphi(g)^{-1}\\
+              & = & \varphi(g) \varphi(g)^{-1} = e_{G'}       
+      \end{eqnarray*}
 \end{enumerate}
+
+Sei $N \lhd G$. Wollen Gruppenstruktur auf $G/N = \lbrace gN | g \in G\rbrace$.\\
+Allgemein $X,Y \subseteq G : XY := \lbrace xy | x \in X, y \in Y \rbrace \subseteq G$\\
+Definiere $\cdot : G/N \times G/N \rightarrow G/N, (gN, kN) \mapsto ghN$\\
+$gN = g'N \Leftrightarrow g(g')^{-1} \in N$\\
+
+Seien also $g' \in G, k' \in G$ mit $gN = g'N, kN = k'N$. Wir wissen, $g(g')^{-1} =: n_1 \in N, k(k')^{-1} =: n_2 \in N$.\\
+Zu zeigen: $gkN = g'k'N$, d.h. $gh(g'h')^{-1} \in N$. Nun ist 
+\begin{eqnarray*}
+gh(g'h')^{-1} &=& g \underbrace{h(h')^{-1}}_{n_2}(g')^{-1}\\
+&=& g n_2 (g')^{-1}\\
+&=& g n_2 g^{-1} \underbrace{g (g')^{-1}}_{n_1}\\
+&=& \underbrace{g n_2 g^{-1}}_{\in N, da N \lhd G} n_1 \in N 
+\end{eqnarray*}
+
+Übungsaufgabe: Verifiziere, dass $\cdot$ eine Gruppenoperation ist.
+
+\textbf{Bemerkung:} $N \lhd G$. Die Gruppe $G/N$ (\glqq G modulo N\grqq ) heißt \glqq Faktorengruppe von G nach N\grqq .\\
+$\pi : G \rightarrow G/N, g \mapsto gN$ heißt die \glqq natürliche Reduktion\grqq , \glqq natürlicher Homomorphismus\grqq , \glqq natürliche Surjektion\grqq , \glqq Reduktionmodulo N\grqq .\\
+$\pi$ ist Epimorphismus. ($g,k \in G : \underbrace{\pi(gh)}_{gh N} = \underbrace{\pi(g) \pi(h)}_{gN \cdot hN}$)
+
+\begin{satz}[1.19]{\glqq Homomorphiesatz\grqq}
+ Sei $\varphi: G \rightarrow G'$ Homomorphismus von Gruppen $G$, $G'$ und sei $N \lhd G$ mit $N \leq ker \varphi$. Dann existiert \emph{genau ein} Homomorphismus $\bar{\varphi} : G/N \rightarrow G'$, derart, dass $\varphi = \bar{\varphi} \circ \pi$. *malt ein kommutierendes Diagramm*\\
+ Es gilt:
+ \begin{itemize}
+  \item $im(\bar{\varphi}) = im(\varphi)$
+  \item $ker(\bar{\varphi}) = \pi(ker(\varphi)) \lhd G/N$
+  \item $ker(\varphi) = \pi^{-1}(ker(\bar{\varphi})) \lhd G$
+ \end{itemize}
+\end{satz}
+\textbf{Beweis:} Eindeutigkeit. Angenommen $\bar{\varphi}$ mit $\varphi = \bar{\varphi} \circ \pi$ existiert $\forall g \in G . \bar{\varphi}(gN) = \bar{\varphi}(\pi(g)) = \varphi(g) \square$\\
+Existenz: Gegeben $gN \in G/N$. Definiere $\bar{\varphi}(gN) := \varphi(g)$. Wohldefiniert?\\
+In der Tat, seien $g,g' \in G: gN = g'N$, das heißt $g=g'n \exists n \in N$. Zu zeigen: $\varphi(g = \varphi(g')$.\\
+$\varphi(g) = \varphi(g'n) = \varphi(g') \varphi(n) = \varphi(g')$, da $N \leq her \varphi$.\\
+\smallskip
+Homomorphieeigenschaft: Seien $gN, hN \in G/N$.\\
+$\bar{\varphi}(gN \cdot hN) = \bar{\varphi}(gh N) = \varphi(gh) = \varphi(g) \varphi(h) = \bar{\varphi}(gN) \cdot \bar{\varphi}(hN)$\\
+\begin{enumerate}
+ \item $ker \varphi = \pi^{-1}(ker(\bar{\varphi})$, da $\varphi = \bar{\varphi} \circ \pi$
+ \item $im(\bar{\varphi}) = im(\varphi), ker \bar{\varphi} = \pi(ker \varphi)$, da $\pi$ \emph{surjektiv} ist.$\square$
+\end{enumerate}
+\textbf{Beachte:} $\bar{\varphi}$ Monomorphismus gdw. $ker \bar{\varphi} = N$ gdw. $ker{\varphi} = N$\\
+Nenne $\bar{\varphi}$ den von $\varphi$ auf $G/N$ \emph{induzierten} Homomorphismus.\\
+\begin{korr}[1.20]
+Ist $\varphi$ ein Epimorphismus, dann gilt $G/ker(\varphi) \rightarrow G'$ ist Isomorphismus von Gruppen.
+\end{korr}
+\begin{satz}[1.21]{1. Isomorphiesatz}
+Sei $G$ Gruppe, $H \leq G$, $N \lhd G$.
+\begin{itemize}
+ \item $HN \leq G$ ist Untergruppe (nicht nur Teilmenge). $N \lhd HN$
+ \item $H \cap N \lhd H$
+ \item $\varphi : {H}/{H \cap N} \rightarrow {HN}/{N}, h(H \cap N) \mapsto h N$ ist Isomorphismus
+\end{itemize}
+\end{satz}
+\textbf{Beweis:}\\
+Übungsaufgabe: $G$ Gruppe, $X \subseteq G$: $X \leq G$ gdw. 1. $X \neq \emptyset$, 2. $\forall x,y \in X : x (y)^{-1} \in X$\\
+\smallskip
+@1: $HN \ni e \cdot e = e$, $\Rightarrow HN \neq \emptyset$\\
+$h_1 n_1, h_2 n_2 \in HN, h_i \in H, n_i \in N$ \\
+Zu zeigen: $h_1 n_1 (h_1 n_1)^{-1} \in HN$. In der Tat $h_1 n_1 n_2^{-1} h_2^{-1} = \underbrace{h_1 h_2^{-1}}_{\in H} (\overbrace{h_2 \underbrace{n1 n_2^{-1}}_{\in N} h_2^{-1}}^{\in N, da N \lhd G}) \in HN$\\
+$N \leq HN, N \lhd G$ impliziert, dass $N \lhd HN$:\\
+$N \lhd G \Leftrightarrow \forall g \in G : g N g^{-1} \subseteq N \Rightarrow \forall k \in HN : kN k^{-1} \subseteq N \Leftrightarrow N \unlhd HN$\\
+\textbf{Bemerkung:} $(HN)/N nicht \cong H$. Z.B. $HH/H = H/H = \lbrace e \rbrace$\\
+Betrachte $\psi: H \rightarrow {HN}/{N}, h \mapsto h e N = hN$ offensichtlich Epimorphismus.\\
+$ker \psi = \lbrace h \in H | kN = N \rbrace = H \cap N$ (@2)
+\begin{korr}[1.22]
+$H/(H\cap N) \rightarrow HN/N$ ist Isomorphismus $\square$
+\end{korr}
+
+\begin{satz}[1.22]{2. Isomorphiesatz}
+ am Montag...
+\end{satz}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
