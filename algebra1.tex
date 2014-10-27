@@ -7,6 +7,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage[all]{xy}  % lustige Diagramme
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 
 \usepackage{multicol} % Multiple columns
@@ -403,7 +404,13 @@ $\pi : G \rightarrow G/N, g \mapsto gN$ heißt die \glqq natürliche Reduktion\g
 $\pi$ ist Epimorphismus. ($g,k \in G : \underbrace{\pi(gh)}_{gh N} = \underbrace{\pi(g) \pi(h)}_{gN \cdot hN}$)
 
 \begin{satz}[1.19]{\glqq Homomorphiesatz\grqq}
- Sei $\varphi: G \rightarrow G'$ Homomorphismus von Gruppen $G$, $G'$ und sei $N \lhd G$ mit $N \leq ker \varphi$. Dann existiert \emph{genau ein} Homomorphismus $\bar{\varphi} : G/N \rightarrow G'$, derart, dass $\varphi = \bar{\varphi} \circ \pi$. *malt ein kommutierendes Diagramm*\\
+ Sei $\varphi: G \rightarrow G'$ Homomorphismus von Gruppen $G$, $G'$ und sei $N \lhd G$ mit $N \leq ker \varphi$. Dann existiert \emph{genau ein} Homomorphismus $\bar{\varphi} : G/N \rightarrow G'$, derart, dass $\varphi = \bar{\varphi} \circ \pi$. 
+
+\begin{displaymath}
+    \xymatrix{          & G \ar[d]^{\varphi} \ar[dl]^{\pi} \\
+                G / N \ar[r]^{\bar{\varphi}} & G' \ar[l] }
+\end{displaymath} 
+ 
  Es gilt:
  \begin{itemize}
   \item $im(\bar{\varphi}) = im(\varphi)$
@@ -450,11 +457,102 @@ $ker \psi = \lbrace h \in H | kN = N \rbrace = H \cap N$ (@2)
 $H/(H\cap N) \rightarrow HN/N$ ist Isomorphismus $\square$
 \end{korr}
 
+\begin{displaymath}
+    %TODO: Make curved arrows / beautiful
+    \xymatrix{ G \ar[d]^{G/H} \ar[dd]^{G/N} \\
+               H \ar[d]^{H/N} \\
+               N }
+\end{displaymath}
+
 \begin{satz}[1.22]{2. Isomorphiesatz}
- am Montag...
+Sei $G$ eine Gruppe, $N, H \trianglelefteq G, n \leq H$. Dann auch $N \trianglelefteq H, H / N \trianglelefteq G / N$ und $G/N / H/N \simeq G/H$.
 \end{satz}
+\textbf{Beweis:} Betrachte $\psi: H \hookrightarrow G
+\xrightarrow{\pi_n} G/N, h \mapsto k \mapsto kN$,
+Homomorphismus. $\ker\psi = N$, insbesondere $N \trianglelefteq H$. Aus dem Homomorphiesatz folgt, dass dies ein Monomorphismus ist. $H/N \to G/N$, konkret: $H/N=$\menge{hN}{h \in H} $\subseteq G/N =$ \menge{gN}{g \in G}.
+Identifiziere $H/N$ mit Untergruppe von $G/N$!
 
+Beachte: $H = \ker_{\pi_H}$, $\pi_H: G \to G/H, g \mapsto gH$. $N \leq \ker\pi_H$. Aus dem Homomorphiesatz folgt, dass dies ein Epimorphismus ist. $G/N \to G/H, gN \mapsto gH$ mit Kern $H/N$.
 
+Nach Korollar 1.20: $G/N / H/N \simeq G/H \square$.
+
+\subsection{Erzeugungssysteme \& zyklische Gruppen}
+
+\begin{defi}(1.23)
+Sei $G$ eine Gruppe und $X \subseteq G$.
+
+$$\left< X \right> \coloneqq \bigcap_{X \subseteq H \leqslant G} H \leqslant G$$
+
+heißt dann die \emph{von $X$ erzeugte} Untergruppe, die kleinste Untergruppe von $G$, die $X$ enthält. 
+
+\textbf{Spezialfall:} $\left< X \right> = G.$ Nenne $X$ ein \emph{Erzeugendensystem} (generating set / system) von $G$.
+
+Setze $d(G) \coloneqq min$\menge{\vert Y \vert}{Y\text{ EZS von }G}$\in \mathbb{N} \cup \{\infty\}$. $G$ heißt \emph{zyklisch} falls $d(G)=1$. $d(G)$ heißt \emph{(minimale) Erzeugerzahl} von $G$.
+\end{defi}
+
+Übungsaufgabe: $d(S_n) = ?$
+
+\textbf{Bemerkungen:}
+\begin{enumerate}
+\item $X \leqslant G, \left< X \right> = X$.
+\item $\left< X \right> =$ \menge{x_1^{\varepsilon _1} x_2^{\varepsilon _2} \dots x_m^{\varepsilon _m}}{m \in \mathbb{N}_0, x_i \in X, \varepsilon_i \in \{ -1, 1\}}
+
+$(x_1^{\varepsilon _1} \dots x_m^{\varepsilon _m})^{-1} = (x_m^{\varepsilon _m} x_{m-1}^{\varepsilon _{m-1}} \dots x_1^{\varepsilon _1})$
+
+\item Für $g \in G \quad <g> =$ \menge{g^n}{n \in \mathbb{Z}} $= \left< \{g\} \right>$. (Notation von letzter Woche)
+\item $G$ zyklisch $\Leftrightarrow \exists g \in G: G = < g > \Leftrightarrow \exists$ Epimorphismus: $\varphi : \mathbb{Z} \to G, 1 \mapsto g$.
+\end{enumerate}
+
+\textbf{Beispiel: (1.24)} \begin{enumerate}
+\item $(\mathbb{Z}, +)$ zyklisch $(\varphi = \texttt{id}_\mathbb{Z})$.
+\item Für $m \in \mathbb{Z}: \mathbb{Z} / (m) = \mathbb{Z} / m\mathbb{Z} = \{0 + m\mathbb{Z}, 1 + m\mathbb{Z}, \dots, m-1 + m\mathbb{Z}\}$
+
+(Nebenklassen von $m\mathbb{Z} \trianglelefteq \mathbb{Z}$!) 
+
+Epimorphismus: $\mathbb{Z} \to \mathbb{Z} / m\mathbb{Z}, u \mapsto r(u) + m\mathbb{Z}$
+
+Division mit Rest: $\exists a, r \in \mathbb{Z} . u = a
+\cdot m + r, 0 \leqslant r \leqslant m-1$
+
+\textbf{Lemma (1.25):} Sei $H \leqslant \mathbb{Z}$. Dann existiert $m \in \mathbb{N}_0$. $H = m\mathbb{Z}$.
+\end{enumerate}
+
+\textbf{Beweis:} Wenn $H = \{0\}$, dann $H = 0 \cdot \mathbb{Z}$. OBdA sei $H \neq \{0\}$. 
+
+Sei $m \in H \setminus \{0\}$ das kleinste positive Element von $H$. Behauptung: $H = m \mathbb{Z}$ \glqq $\supseteq$\grqq klar, da $H \leqslant \mathbb{Z}$. Sei $h \in H . \exists b, r \in \mathbb{Z}: h = b \cdot m + r, 0 \leq r < m \Rightarrow h - bm = r \in H$. Nach Wahl von $m$ ist $r = 0 \Rightarrow \bot$. $\square$
+
+\begin{satz}[1.26]
+Sei $G$ eine zyklische Gruppe, dann gilt:
+
+$$ G \simeq \begin{cases}
+  \mathbb{Z} \left(= \mathbb{Z} / (0) \right), & \text{falls }\vert G \vert = \infty\\
+  \mathbb{Z} / m\mathbb{Z}, & \text{falls }\vert G \vert = m < \infty
+\end{cases}$$
+\end{satz}
+\textbf{Beweis:} Sei $G = \left< g \right>, g \in G$. Dann ist $\varphi: \mathbb{Z} \to G, n \mapsto g^n$ ist ein Epimorphismus. Nach Korrolar 1.20 ist $\mathbb{Z}/(\ker \varphi) \simeq G$. Aus Lemma 1.25 folgt $\ker \varphi = m\mathbb{Z}, m \in \mathbb{N}_0$.
+
+$m=0 \Rightarrow G \simeq \mathbb{Z}$. $m > 0: G \simeq
+\mathbb{Z} / (m \mathbb{Z}), \vert G \vert = m$. $\square$
+
+\begin{satz}[1.27]
+Sei $G$ zyklisch. (1) Jede Untergruppe von $G$ ist zyklisch. (2) Ist $\varphi G \to G'$ ($G'$ beliebige Gruppe!) ein Homomorphismus, dann sind $\ker \varphi$ und Im$\varphi$ zyklisch
+\end{satz}
+\textbf{Beweis:} @2: \glqq $\ker\varphi \leqslant G$ zyklisch\grqq\ folgt aus (1). $G = \left< g \right>, g \in G$. Im$\varphi =$ \menge{\varphi(h)}{h \in G}  $=$ \menge{\varphi(g^n)}{n \in \mathbb{Z}} $=$ \menge{\varphi(g)^n}{n \in \mathbb{Z}} $= \left< \varphi(g) \right> \leqslant G'$.
+
+@1: Sei $H \leq G$. Sei $\psi : \mathbb{Z} \to G$ ein Epimorphismus. Betrachte $\underbrace{\psi^{-1}(H)}_{= K} \leqslant \mathbb{Z}$ - zyklisch! Insbesondere ist $\psi(K) = H$ - zyklisch nach (2).
+
+\begin{defi}
+Sei $G$ eine Gruppe, $g \in G$. Ordnung von $g \coloneqq \vert \left< g \right> \vert$, geschrieben $\vert g \vert$.
+\end{defi}
+
+\begin{satz}[1.29](Kleiner Satz von Fermat)
+Sei $G$ eine dnlische Gruppe, $g \in G$. Dann teilt $\vert g \vert$ die Ordnung $\vert G \vert$ und es gilt $g^{\vert G \vert} = e$.
+\end{satz}
+\textbf{Beweis:} Betrachte den Epimorphismus $\varphi: \mathbb{Z} \to \left< g \right> = H \leqslant G$, mit $\ker \varphi = m \mathbb{Z}, m \in \mathbb{N}$.
+
+$\vert G \vert < \infty \Rightarrow \vert H \vert = \vert \left< g \right> \vert = \vert g \vert$ teilt $\vert G \vert$. $H \simeq \mathbb{Z} / m\mathbb{Z} \Rightarrow \vert H \vert = m = \vert g \vert.$
+
+$(g^m)^{\vert G \vert / m} = e^{\vert G \vert / m} = e \square$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
