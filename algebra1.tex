@@ -552,7 +552,119 @@ Sei $G$ eine dnlische Gruppe, $g \in G$. Dann teilt $\vert g \vert$ die Ordnung 
 
 $\vert G \vert < \infty \Rightarrow \vert H \vert = \vert \left< g \right> \vert = \vert g \vert$ teilt $\vert G \vert$. $H \simeq \mathbb{Z} / m\mathbb{Z} \Rightarrow \vert H \vert = m = \vert g \vert.$
 
-$(g^m)^{\vert G \vert / m} = e^{\vert G \vert / m} = e \square$
+$(g^m)^{\vert G \vert / m} = e^{\vert G \vert / m} = e \square$\bigskip
+
+\section{Fundamente der Ringtheorie}
+
+\begin{defi}(2.1)
+Ein \emph{Ring} (mit Einselement \texttt{1}) ist eine Menge $R$ mit $+ : R \times R \to R, (x,y) \mapsto x + y$, $\cdot : R \times R \to R, (x,y) \mapsto x + y$, derart, dass
+\begin{enumerate}
+\item $(R,+)$ abelsche Gruppe (in "additiver Notation" mit Neutralelement $0 \in R$)
+\item $(R, \cdot)$ Monoid
+\item Distributivgesetze gelten: $\forall a,b,c \in R: (a+b) \cdot c = a  \cdot c + b \cdot c, c \cdot (a+b) = c \cdot a + c \cdot b$.
+\end{enumerate}
+$R$ heißt \emph{kommutativ}, falls $\forall a,b \in R: ab = ba$.
+\end{defi}
+
+\begin{defi}(2.2)
+Ein \emph{Unterring} eines Ringes $(R, +, \cdot)$ ist eine Teilmenge $S$, die bezüglich $+$ und $\cdot$ ein Ring ist. $S$ sei eine additive Untergruppe von $(R,+)$ und ein Untermonoid von $(R,\cdot)$.
+
+Das Paar $S \subset R$ heißt auch \emph{Ringerweiterung}.
+\end{defi}
+
+\begin{defi}(2.3)
+Sei $R$ ein Ring. $R^* = $ \menge{a \in R}{\exists b \in R}: ab = ba = \texttt{1} - Einheitengruppe (\glqq unit group\grqq) von $R$. $a \in R$ heißt \emph{Einheit}, falls $a \in R^*$.
+\begin{itemize}
+\item $R$ heißt Schiefkörper (\glqq skew field\grqq) falls $R \neq \{0\} und R^* = R \setminus \{0\}$, d.h. jedes von $0$ verschiedenes Element in $R$ ist invertierbar.
+
+\item Ein \emph{Körper} (\glqq field\grqq) ist ein Schiefkörper, bei dem Multiplikation kommutativ ist: $\forall a,b \in R: ab = ba$.
+
+\item Ein Element $a \in R$ heißt \emph{Nullteiler} (\glqq zeri divisor\grqq) falls $\exists b \in R \setminus \{0\} : ab = 0$ oder $ba = 0$. $(0 \in R$ ist Nullteiler!$)$
+
+\item $R$ heißt \emph{nullteilerfrei}, \underline{\emph{Integritätsbereich}}, \emph{Integritätsring} (\glqq (integral) domain\grqq ) falls $R \neq \{0\}$ und $R \setminus \{0\}$ keine Nullteiler hat.
+\end{itemize}
+\end{defi}
+
+Übungsaufgabe: $(R*, \cdot)$ ist Gruppe!
+
+\textbf{Bemerkung:} \texttt{Warnung:} $a,b,c \in R, ac = bc \leftrightarrow ac - bc = (a-b)c = 0$. \underline{Wenn} $R$ Integritätsbereich ist und $c \neq 0)$, folgt hierais $a = b$.\bigskip
+
+\textbf{Beispiel:} (2.4): \begin{enumerate}
+\item $(\mathbb{Z}, +, \cdot)$ ist ein Ring. $\mathbb{Z}^* = \{1,-1\}$, Nullteiler: $\{0\} \Rightarrow \mathbb{Z}$ ist Integritätsbereich!
+
+\item $R$ kommutativ. Dann ist Mat$_n(R)$ ist Ring mit $1 = E_n$ und der Nullmatrix als Nullelement.
+
+Mat$_n(R)^* =$ \menge{A \in Mat_n(R)}{\exists B \in Mat_n(R): AB = BA = E_n} $=$ \menge{A \in Mat_n(R)}{ det A \underline{\in R^*}} $= GL_n(R) (= GL(n;R))$. (general linear)
+
+Zum Beispiel: $GL_n(\mathbb{Z}) =$ \menge{A \in Mat_n(\mathbb{Z})}{det A \in \{-1,1\}}
+
+$n > 1: Mat_n(R)$ im Allgemeinen \underline{kein Integritätsbereich}: $\exists A: A^m (= A \cdot A^{m -1}) = 0$ für geeignetes $m$. 
+
+\item \underline{Hamiltonische Quaternionen}
+
+$\mathbb{H} = \left< e, i, j, k \right>_\mathbb{R} = \mathbb{R} e \oplus \mathbb{R} i \oplus \mathbb{R} j \oplus \mathbb{R} k = $ \menge{a_1 e + a_2 i + a_3 j + a_4 k}{a_i \in \mathbb{R}}
+
+Multiplikationstabelle:
+\begin{tabular}{ c | c c c c}
+$\cdot$ & e & i & j & k \\
+\hline
+e & e & i & j & k\\
+i & i & -e & k & -j\\
+j & j & -k & -e & i\\
+k & k & j & -i & -e\\
+\end{tabular}
+
+$(a_1 e + a_2 i + a_3 j + a_4 k) (b_1 e + b_2 i + b_3 j + b_4 k) = a_1 b_1 \underbrace{e \cdot e}_{e} + a_1 b_1 \underbrace{e \cdot i}_{i} + \dots + a_3 b_4 \underbrace{j \cdot k}_{i} + \dots$
+
+Tatsache / Übungsaufgabe: $(\mathbb{H}, +, \cdot)$ ist ein Schiefkörper aber kein Körper.
+
+$\mathbb{H} = \underbrace{\underbrace{\mathbb{R} e}_{\simeq \mathbb{R}} \oplus \mathbb{R} i}_{\simeq \mathbb{C}} \oplus \mathbb{R} j \oplus \mathbb{R} k$
+
+\begin{displaymath}
+    \xymatrix
+    {
+      \mathbb{H} \ar@{-}[d] \simeq_\mathbb{R} \mathbb{R}^4\\
+      \mathbb{C} \ar@{-}[d] \simeq_\mathbb{R} \mathbb{R}^2\\
+      \mathbb{R}
+    }
+\end{displaymath} 
+
+Von $\mathbb{R}$ zu $\mathbb{C}$ wird etwas gewonnen (algebraische Abgeschlossenheit, von $\mathbb{C}$ zu $\mathbb{H}$ wird allerdings etwas sehr wichtiges verloren (Kommutativität der Multiplikation). Diese Reihe könnte noch weiter gehen, dann wird es aber irgendwann uninteressant.
+
+\item Sei $X$ eine Menge, $X \neq \varnothing$, $(R_x)_{x \in X}$ eine Familie von Ringen, dann ist $P = \prod_{x \in X} R_x$ ein Ring mit Addition $(r_x) + (s_x) = (r_x + s_x)_x$ und der Multiplikation $(r_x)(s_x) = (r_x \cdot s_x)_x$. 
+
+Null: $(0_x)_x$, Eins: $(\texttt{1}_x)_x$
+
+\textbf{Achtung:} $P$ hat Nullteiler, auch wenn alle $R_x$ nullteilerfrei sind: $\vert X \vert = 2: P = \mathbb{Z} \times \mathbb{Z} = \prod_{x \in X} \mathbb{Z}, a = (1,0), b = (0,1) \Rightarrow a \cdot b = (0,0)$
+\end{enumerate}
+
+\begin{defi}(2.5) (Polynomring in einer Variablen)
+Sei $R$ ein \underline{kommutativer} Ring. Der \emph{Ring der Polynume in einer Variablen $X$} (Polynomring) mit \emph{Koeffizienten in $R$} ist
+
+$R[X] = \mathbb{R}^{\mathbb{N}_0} =$ \menge{(a_0, a_1, \dots)}{\forall i \in \mathbb{N}_0 : a_i \in \mathbb{R}. \text{Für fast alle } i: a_i = 0} mit Addition $(a_i)_{i \in \mathbb{N}_0} + (b_i)_{i \in \mathbb{N}_0} = (a_i + b_i)_{i \in \mathbb{N_0}} (\in R[x])$.
+
+Multiplikation: $(a_i)_{i \in \mathbb{N}_0} \cdot (b_i)_{i \in \mathbb{N}_0} = (c_i)_{i \in \mathbb{N}_0} \in R[X]$ wobei für $i \in \mathbb{N}_0: c_i \coloneqq \sum_{r+s = i} a_r b_s ) = \sum_{j=0}^{i} a_j b_{i-j}$
+
+Schreibe $f(X) = \sum_{i=0}^{\infty} a_i X^i = \sum_{i = 0}^{N} a_i X^i (n >> 0: a_i = 0$ falls $i \geq N)$ anstelle von $(a_i)_{i \in \mathbb{N}_0} \in R[X], g(X) = \sum_{i=0}^{\infty} b_i X^i$
+
+$f(X) \cdot g(X) = \sum_{i = 0}^{\infty} c_i X^i$
+
+\textbf{Idee:} $R \subset S$ Ringerweiterung, $f(X) \in R[X] : \rightsquigarrow f: S \to S, s \mapsto f(s) = \sum_{i=0}^{\infty} a_i s^i \in S$, die von $f$ induzierte\glqq polynomielle Funktion\grqq .
+
+$R = \mathbb{F}_2 = \{0,1\} : f(X) =) X^2 - X = (0, -1, 1, 0, \dots), g(X) = 0 = (0,0, \dots), \quad \mathbb{F}_2 \to \mathbb{F}_2, s \mapsto s^2 - s = 0$ !
+
+Polynome sind verschieden von Polynomfunktionen!
+\end{defi}
+
+\begin{defi}(2.6)
+Sei $f = (a_i)_{i \in \mathbb{N}_0} \in R[X], R$ ein kommutativer Ring. Für $i \in \mathbb{N}_0$ ist $a_i$ der \underline{i-te Koeffizient von $f$}. Der \emph{Grad} (\glqq degree\grqq) von $f (\neq 0)$ ist max \menge{i}{a_i \neq 0}, geschrieben $\deg (f)$. $\deg(0) = - \infty$.
+
+Sei $f \neq 0$. Dann ist der Leitkoeffizient von $f$ = $a_{\deg f}$. Ist $a_{\deg f} = 1$, so heißt $f$ \emph{normiert}.  
+\end{defi}
+
+\begin{satz}[2.7] (Polynomdivision mit Rest)
+Sei $R$ ein kommutativer Ring, $g = (a_i) \in R[X]$, dessen Koeffizient $a_{\deg(g)}$ eine Einheit in $R$ ist. Dann \underline{gibt es} zu jedem $f \in R[X]$ \underline{eindeutig} bestimmte $q, r \in R[X]: f = q \cdot g + r, \deg(r) < deg(g)$.
+\end{satz}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
