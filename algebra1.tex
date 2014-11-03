@@ -666,6 +666,107 @@ Sei $f \neq 0$. Dann ist der Leitkoeffizient von $f$ = $a_{\deg f}$. Ist $a_{\de
 Sei $R$ ein kommutativer Ring, $g = (a_i) \in R[X]$, dessen Koeffizient $a_{\deg(g)}$ eine Einheit in $R$ ist. Dann \underline{gibt es} zu jedem $f \in R[X]$ \underline{eindeutig} bestimmte $q, r \in R[X]: f = q \cdot g + r, \deg(r) < deg(g)$.
 \end{satz}
 
+\subsection{Ideale, Homomorphismen, Faktorringe}
+
+\begin{defi}(2.8)
+Sei $R$ ein Ring. Eine Teilmenge $I \subseteq R$ heißt \emph{Ideal (von $R$)} falls gilt:
+\begin{enumerate}
+\item $0 \in I$
+\item $\forall a, b \in I: a+b \in I$
+\item $\forall a \in I, b \in R: ab \in I$
+\end{enumerate}
+Äquivalent: $I$ additive Untergruppe von $R$, abgeschlossen bezüglich Multiplikation mit Elementen von $R$. Gegebenenfalls schreibe $I \trianglelefteq R$
+\end{defi}
+
+Sind $I_1 , I_2 \trianglelefteq R$, so sind:
+
+$I_1 + I_2 = $ \menge{i_1 + i_2}{i_1 \in I_1, i_2 \in I_2} $\trianglelefteq R$.
+
+$I_1 \cdot I_2 = $ \menge{\sum_{\text{endlich}}i_1 i_2}{i_1 \in I_1, i_2 \in I_2} $\trianglelefteq R$.
+
+$I_1 \cap I_2 = $ \menge{i \in R}{i \in I_1 \text{ und } i \in I_2} $\trianglelefteq R$.
+
+Allgemeiner: Gegeben eine Familie $(I_x)_{x \in X}$ von Idealen von $R$ (d.h. $I_x \trianglelefteq R \forall x \in X$), definiere
+
+$\sum_{x \in X} I_x \coloneqq$ \menge{\sum_{x \in X} i_x}{ \forall x \in X: i_x \in I_x; i_x = 0 \text{ für fast alle } x \in X}.
+
+Für $i \in I$ schreibe:
+
+$(i) \coloneqq $ \menge{ib}{ b \in R} $\eqqcolon iR \trianglelefteq$, das von $i$ erzeugte \emph{Hauptideal} (principal ideal).
+
+\underline{Check:}\begin{enumerate}
+\item $0 = i \cdot 0 \in (i)$
+\item $ib_1 + ib_2 = i(b_1 + b_2) \in (i)$ für $b_i \in R$
+\item $(ib)b' = i (bb') \in (i)$ für $b, b' \in R$
+\end{enumerate}
+
+\begin{defi}(2.9)\begin{enumerate}
+\item Sei $R$ ein Ring und $X$ eine Menge. Sei $(i_x)_{x \in X}$ eine Familie von Ringelementen. Dann heißt $I = \sum_{x \in X} (i_x) \trianglelefteq R$ das von den $i_x$ \emph{erzeugt Ideal}. Das kleinste Ideal, das die Elemente $i_x$ enthält. Die Familie $(i_x)_{x \in X}$ heißt (ein) \emph{Erzeugendensystem}.
+
+\item $I \trianglelefteq R$ heißt \emph{endlich erzeugt}, falls es ein endliches Erzeugendensystem zulässt.
+
+\item $I \trianglelefteq R$ heißt \emph{Hauptideal}, falls es ein Erzeugendensystem der Kardinalität $1$ zulässt. $\exists i \in R: I = (i)$.
+
+\item Ist $R$ ein Integritätsbereich, und ist jedes Ideal von $R$ ein Hauptideal, dann heißt $R$ ein \emph{Hauptidealring} (principal ideal domain).
+\end{enumerate}
+\end{defi}
+
+\textbf{Proposition (2.10):} $(\mathbb{Z}, +, \cdot )$ ist ein Hauptidealring.\\
+\textbf{Beweis:} $\mathbb{Z}$ ist offensichtlich Integritätsbereich. Ideale in $\mathbb{Z}$ sind insbesondere additive Untergruppen. Die Untergruppen von $\mathbb{Z}$ sind alle von der Form $m\mathbb{Z} = (m) = $ \menge{m \cdot n}{n \in \mathbb{Z}} $, m \in \mathbb{N}_0 \quad \square$\bigskip
+
+\textbf{Beispiel (2.11):} \begin{enumerate}
+\item Der Ring $\mathbb{Z}[X]$ ist kein Hauptidealring: z.B. $I = (2, X) \trianglelefteq \mathbb{Z}[X]$ (Gegeben Elemente $i_1, \dots , i_n \in R: (i_1, \dots , i_n) \coloneqq \sum_{j=1}^{n} (i_j) \trianglelefteq R$)
+
+$(2) \trianglelefteq \mathbb{Z}[X]: (2) = $ \menge{2 \cdot f}{f \in \mathbb{Z}[X]} = \menge{\sum_{i=0}^\infty a_i x^i}{ \text{fast alle } a_i = 0 , a_i \in (2) \leqslant \mathbb{Z} } 
+
+$(X) = $ \menge{X \cdot f}{f \in \mathbb{Z}[X]} = \menge{\sum_{i=0}^\infty a_i x^i}{ \text{fast alle } a_i = 0 , a_0 = 0 } 
+
+$(2,X) = (2) + (X) = $ \menge{f \in \mathbb{Z}[X]}{f = \sum_{i = 0}^{\infty} a_i x^i, \text{fast alle } a_i = 0 , a_0 = 0 } 
+
+\textbf{Behauptung:} $(2,X)$ ist kein Hauptideal (ÜA!)
+
+\item Ist $R$ ein Körper, so gibt es \emph{nur} die Ideale $(0) = \{0\}$ und $(1) = $ \menge {1 \cdot r}{r \in R} $= R$. Sei etwa $x \in I \setminus \{0\}$. Dann ist $x \cdot x^{-1} = 1 \in I$, das heißt $I = (1) = R$.
+
+%% FRAGE: Angenommen R Ring, R /= {0}. Einzige Ideale (0) und R. Ist dann R ein Körper???
+\end{enumerate}
+
+\begin{defi}(2.12)
+Seien $R, R'$ Ringe. Eine Abbildung $\varphi : R \to R'$ heißt \emph{Ringhomomorphismus}, falls \begin{enumerate}
+\item $\forall a,b \in R: \varphi(a + b) = \varphi(a) + \varphi(b)$
+\item $\varphi(1) = 1, \forall a,b \in R: \varphi(ab) = \varphi(a) \varphi(b)$.
+\end{enumerate}
+(d.h. $\varphi$ sei Homomorphismus abelscher Gruppen und Monoiden).
+
+Die in Definition 1.7 eingeführten Begriffe (Epi-, Mono-, Iso-, Endo- und Automorphismus) existieren sinngemäß auch für Ringe ((Schief-)Körper).
+\end{defi} 
+
+\textbf{Bemerkung:} Sei $\varphi : R \to R'$ ein Ringhomomorphismus.\begin{enumerate} 
+\item Offensichtlich ist eine Komposition von Ringhomomorphismen wieder ein Ringhomomorphismen. 
+\item $\ker \varphi \trianglelefteq R \quad (1) \varphi(0) = 0, 2) a,b \in \ker \varphi: \varphi(a+b) = \varphi(a) + \varphi(b) = 0, 3) a \in \ker \varphi, b \in R: \varphi (ab) = \varphi(a) \varphi(b) = 0 \cdot \varphi(b) = 0)$
+
+im$\varphi \leqslant R$ Unterring, i.A. kein Ideal!
+
+\item $R^* =$\menge{a \in R}{ \exists b \in R: ab = ba = 1} -- Einheitengruppe.
+
+$\varphi$ induziert einen Gruppenhomomorphismus: $\varphi^*: R^* \to {R'}^*, a \mapsto \varphi(a)$.
+
+\item Ist $R$ ein Körper, $R' \neq \{0\}$. Dann ist $\varphi$ injektiv. (Angenommen $\varphi$ ist nicht injektiv. Dann ist $\ker \varphi \neq \{0\} \trianglelefteq R$, d.h. $\ker \varphi = R \Rightarrow \bot$)
+\end{enumerate}
+
+Sei $I \trianglelefteq R, R$ ein Ring. \underline{Ziel:} Definiere auf $R / I = $ \menge{a + I}{ a \in R} eine Ringstruktur.
+
+\textbf{Addition:} $\forall a,b \in R: (a+I) + (b+I) = (a+b)+I$
+
+\textbf{Multiplikation:} $\forall a,b \in R: (a+I) \cdot (b+I) = (a\cdot b)+I$
+
+Dies ist wohldefiniert! In der Tat, seien $a', b' \in R$ mit $a+I = a' + I, b+I = b' + I$. Das heißt, dass $\exists i_a, i_b \in I: a = a' + i_a, b = b' + i_b.$ 
+
+Zu zeigen: $a \cdot b + I = a' \cdot b' + I$.
+
+$ab+I = (a' + i_a) (b' + i_b) + I = a'b' + \underbrace{a' \cdot i_b}_{\in I \text{ falls kommutativ}} + \underbrace{i_a b'}_{\in I} + \underbrace{i_a i_b}_{\in I} + I = a'b' + I$, da $I \trianglelefteq$
+
+\textbf{ÜA:} $(R/I, +, \cdot)$ ist ein Ring und $\bar{\varphi}: R \to R/I, a \mapsto a + I$ ist ein surjektiver Ringhomomorphismus.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
