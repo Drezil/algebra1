@@ -7,6 +7,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{yfonts}
 \usepackage[all]{xy}  % lustige Diagramme
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 
@@ -20,6 +21,8 @@
 \newtheorem{defi}{Definition}
 \newtheorem{satz}{Satz}
 \newtheorem{korr}{Korrolar}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}{Proposition}
 
 \begin{document}
 \newcommand{\menge}[2]{$\{\,{#1}\,\vert\,{#2}\,\}$}
@@ -556,6 +559,8 @@ $(g^m)^{\vert G \vert / m} = e^{\vert G \vert / m} = e \square$\bigskip
 
 \section{Fundamente der Ringtheorie}
 
+\textbf{Bis aif weiteres: R kommutativ.}
+
 \begin{defi}(2.1)
 Ein \emph{Ring} (mit Einselement \texttt{1}) ist eine Menge $R$ mit $+ : R \times R \to R, (x,y) \mapsto x + y$, $\cdot : R \times R \to R, (x,y) \mapsto x + y$, derart, dass
 \begin{enumerate}
@@ -766,6 +771,86 @@ Zu zeigen: $a \cdot b + I = a' \cdot b' + I$.
 $ab+I = (a' + i_a) (b' + i_b) + I = a'b' + \underbrace{a' \cdot i_b}_{\in I \text{ falls kommutativ}} + \underbrace{i_a b'}_{\in I} + \underbrace{i_a i_b}_{\in I} + I = a'b' + I$, da $I \trianglelefteq$
 
 \textbf{ÜA:} $(R/I, +, \cdot)$ ist ein Ring und $\bar{\varphi}: R \to R/I, a \mapsto a + I$ ist ein surjektiver Ringhomomorphismus.
+
+\textbf{Wiederholung:}\\
+$I \triangleleft R: R/I = \lbrace a + I | a \in R \rbrace$. $R/I$ Faktorring \glqq R modulo I\grqq \\
+$\pi : R \rightarrow R/I, a \mapsto a+I$ surjektiver Ringhomomorphismus
+\begin{satz}[2.13]
+ Sei $\varphi: R \rightarrow R'$ Ringhomomorphismus und $I \trianglelefteq R$ derart, $I \subseteq \ker\varphi$. Dann existirt ein eindeutiger Ringhomomorphismus $\bar\varphi : R/I \rightarrow R'$ derart, dass
+ $$\bar \varphi \circ \pi = \phi$$
+ und \begin{itemize}
+      \item $im \varphi = im \bar \varphi$
+      \item $\ker \bar \varphi = \pi(\ker \varphi)$
+      \item $\ker \varphi = \pi^{-1}(\ker \bar \varphi)$
+     \end{itemize}
+
+Insbesondere ist $\bar \varphi$ injektiv gdw. $I = ker \varphi$
+\end{satz}
+
+\begin{korr}[2.14]
+ Ist $\varphi : R \rightarrow R'$ surjektiver Ringhomomorphismus (mit $I = \ker \varphi$), dann ist 
+ $$\bar \varphi : R/(\ker \phi) \rightarrow R'$$
+ Ringisomorphismus.
+\end{korr}
+Isomorphisätze 1.20 und 1.21 haben Analoga in Ringtheorie (\glqq Gruppe\grqq $leftrightarrow$ \glqq Ring\grqq , \glqq Normalteiler\grqq $leftrightarrow$ \glqq Ideal \grqq ).\\
+\medskip
+Motivation: $I \triangleleft R \leadsto R/I$. \textbf{Ziel:} Gegeben ringtheoretische Eigenschaft P: \glqq Was heisst es für I, dass $R/I$ Eigenschaft P hat?\grqq .\\
+\begin{defi}[2.15]
+ Sei $R$ Ring (kommutativ mit 1), $I \triangleleft R$, $I \neq R$. I heisst
+ \begin{itemize}
+  \item Primideal (prim) in R, falls gilt: $\forall a,b \in R: ab \in I \Rightarrow a \in I \textrm{ oder } b \in I$
+  \item Maximalideal (maximal) in R, falls: $J \trianglelefteq R, I \subseteq J \Rightarrow I = J \textrm{ oder } J = R$ (informell: Es gibt kein echtes Ideal zwischen I und R. Aber vorsicht: nicht eindeutig!)
+ \end{itemize}
+\end{defi}
+In der Literatur: \textfrak{p} Prim, \textfrak{m} Maxi
+\begin{lemma}[2.16]
+ Seit $R \neq \lbrace 0 \rbrace$ Ring. Das Nullideal $\lbrace 0 \rbrace$ ist
+ \begin{itemize}
+  \item prim gdw. $R$ IB ist
+  \item max gdw $R$ Körper ist
+ \end{itemize}
+\end{lemma}
+\textbf{Beweis:}\\
+@1: $(0)$ ist prim: $a\cdot b \in (0) \Leftrightarrow ab = 0 \Rightarrow a \in (0) oder b \in (0) \Leftrightarrow a = 0 \textrm{ oder } b = 0) \Leftrightarrow 0$ ist der einzige Nullteiler $\Leftrightarrow$ $R$ ist IB.\\
+@2: Angenommen $(0)$ max in $R$. Zu zeigen: $R$ Körper, das heisst $R^* = R \setminus \lbrace 0 \rbrace$. Sei $a \in R \setminus \lbrace 0 \rbrace$. Es reicht zu zeigen: $(a) = R = (1)$. Klar nach Maximalität des Nullideals $(0)$.\\
+Angenommen $R$ ist Körper, So hat $R$ nur die beiden(!) Ideale $(0)$ und $(1) = R$. Damit ist $(0)$ maximal. $\square$\\
+\smallskip
+Beachte: $R \cong R/(0)$.
+\begin{prop}[2.17]
+ Sei $R$ ein Ring, $I \triangleleft R$, ($R \neq (0), I \neq R)$. Dann ist $I$
+ \begin{enumerate}
+  \item prim gdw. $R/I$ ein IB ist.
+  \item maximal gdw. $R/I$ ein Körper ist.
+ \end{enumerate}
+Insbesondere ist jedes \emph{maximale Ideal} prim (Umkehrung gilt nicht!).
+\end{prop}
+\textbf{Beweis:}\\
+$\bar{ } : R \rightarrow R/I; a \in R \bar{a} = a + I$; $x \in R : \bar{x} = \bar{0}$ gdw. $x \in I$\\
+@1: $I$ prim gdw. $\forall a,b \in R : (\bar{a}\cdot \bar{b} = \bar{ab} = \bar{0}\Rightarrow \bar{a} = \bar{0} \textrm{ oder } \bar{b} = \bar{0} \Leftrightarrow R/I$ ist IB ($x,y \in R/I, xy = 0 \Rightarrow x =0 \textrm{ oder } y = 0$)\\
+@2: Nach Lemma 2.16 reicht zu zeigen: $I$ maximal genau dann wenn in $R/I$ das Nullideal maximal ist. Behauptung folgt aus der Tatsache, dass $\lbrace J \triangleleft R | I \trianglelefteq J \rbrace \leftrightarrow \lbrace \bar J \triangleleft R/I \rbrace$ mit $J \mapsto \bar J = \lbrace \bar j|j\in J\rbrace$ bijektiv ist.$\square$
+
+\begin{korr}[2.18]
+ Ideale in $(\mathbb{Z},+,\cdot)$ sind von der Fom $m\mathbb{Z} = (m), m \in \mathbb{N}_0$.\\
+ $(m)$ ist \emph{prim} genau dann wenn $m = 0$ oder $m$ Primzahl.\\
+ $(m)$ ist \emph{maximal} genau dann wenn $m$ Primzahl.\\
+\end{korr}
+Seien $a,b \in \mathbb{Z}$ heissen \emph{koprim} (teilerfremd), wenn $ggT(a,b) = 1$: $\exists x,y \in \mathbb{Z}: ax + by = 1$ (Lemma von Bézout).\\
+Idealtheoretisch formuliert: $(a) + (b) = (1) = \mathbb{Z}$ - Äquivalent zu Bézouts Lemma.\\
+(Variante des) \emph{Chinesichen Restsatzes}: Eine Kongruenz modulo $a \cdot b$ ist lösbar gdw. wenn sie lösbar ist $mod (a)$ und $mod (b)$.\\
+Zum Beispiel $a = 2, b = 3$: $X^2 \equiv 5 mod (6)$ lösbar gdw. $X^2 \equiv 5 \equiv 1 mod (2)$ lösbar \emph{und} $X^2 \equiv 5 \equiv 2 mod (3)$. Letzteres ist aber nicht lösbar, also ist die Gleichung $mod (6)$ nicht lösbar.\\
+$R$ Ring $I_1, I_2 \trianglelefteq R$ koprim $:\Leftrightarrow I_1 + I_2 = R \Leftrightarrow (I_1,I_2) = 1$
+\begin{satz}[2.19]{Chinesischer Restsatz (Chinese Remainder Theorem (CRT))}
+Sei $R$ kommutativer Ring mit 1, $I_1, \dots, I_n$ paarweise koprime Ideale. Dann ist
+$$\varphi : R \rightarrow R/I_1 \times \dots \times R/I_n, a \mapsto (a + I_1, \dots, a + I_n)$$
+ein surjektiver Ringhomomorphismus mit $\ker \varphi = \bigcap_{j=1}^n I_j =: S$.\\
+Korrolar 1.24: $\bar \varphi : R/S \overset{\tilde{ }}{\rightarrow} R/I_1 \times \dots \times R/I_j$ ist Ringisomorphismus.
+\end{satz}
+\textbf{Beweis:}\\
+Zeige Surjektivität von $\varphi$! Zeige zunächst: $\forall j \in [n] = \lbrace 1, 2,  \dots, n\rbrace: I_j$ und $bigcap_{i \neq j} I_i$ sind koprim, das heisst, $1 \in I_j + \bigcap_{i \neq j} I_i$.\\
+Nach Voraussetzung existieren für $i \neq j$ Elemente $a_i \in I_j, a_i' \in I_i$ mit $a_i + a_i' = 1$.\\
+$$1 = \prod_{i \neq j} 1 = \prod_{i \neq j} (a_i + a_i') \in I_j + \prod_{i \neq j} I_i \subseteq I_j + \bigcap_{i \neq j} I_i$$.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

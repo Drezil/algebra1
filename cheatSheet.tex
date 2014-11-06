@@ -1,0 +1,37 @@
+%\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,10pt]{scrartcl}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+\section{Cheat Sheet Algebra 1}
+
+\begin{tabular}{l|l|l}
+ Was & Definition & Beschreibung \\
+ \hline \hline
+ Homomorphismus & $\varphi : G \rightarrow G'$ & $\varphi(e) = e'$ und $\forall a,b \in G : \varphi(a\cdot b) = \varphi(a) \cdot \varphi(b)$ \\\hline
+ Monomorphismus & $\varphi$ injektiver Hom. & $\ker(\varphi) = \lbrace e\rbrace$ \\\hline
+ Epimorphismus & $\varphi$ surjektiver Hom. & $im(\varphi) = G'$ \\\hline
+ Isomorphismus & $\varphi$ bijektiver Hom. & injektiv und surjektiv \\\hline
+ Endomorphismus & $\varphi : G \rightarrow G$ & bleibt in derselben Gruppe \\\hline
+ Automorphismus & $\varphi$ bijektiver End. & \\\hline
+ Linksnebenklasse & $gH \subseteq G$ & Weiter ist äquivalent: $gH = g'H$, $gH \cap g'H = \emptyset$, \\
+		  &		     & $g \in g'H$, $g'^{-1}g \in H$ \\\hline
+ $G/H$		& $gH | g \in G$ & analog für Rechtsnebenklassen. \\
+		&		& Bijektion zwischen LNK und RNK.\\\hline
+ $|G : H|$	& $|G/H|=|H\backslash G|$ & Index von H in G \\\hline
+ Satz von Lagrange & $|G| = |H| \cdot |G : H|$ & nur für \emph{endliche} G \\\hline
+ Normalteiler & $\forall g \in G : gH = Hg$ & $gH$ ist die von $g$ bestimmte Nebenklasse von $H$ in $G$.\\
+ $N \triangleleft G$ & mit $H \leq G$& G abelsch $\Rightarrow$ \emph{Jede} Untergruppe ist Normalteiler.\\\hline
+ natürliche Reduktion & $\pi : G \rightarrow G/N$ & $\pi$ ist Epimorphismus \\
+ natürlicher Hom. & $g \mapsto gN$ & \\\hline
+ Homomorphiesatz & $\exists! \bar{\varphi} : G/N \rightarrow G'$ & $im(\bar\varphi)= im(\varphi)$, $\ker(\bar\varphi) = \pi(\ker(\varphi)) \triangleleft G/N$ \\
+		 & mit $\varphi = \bar{\varphi} \circ \pi$ & \\
+		 & wenn $N \triangleleft G, N \leq \ker \varphi$ & $\ker(\varphi) = \pi^{-1}(\ker(\bar\varphi)) \triangleleft G$\\\hline
+ $\bar\varphi = $ von $\varphi$ auf $G/N$ & & $\bar\varphi$ Monomorphismus gdw. $\ker \bar\varphi = N$ \\
+ induzierter Hom. & &  gdw. $\ker \varphi = N$ \\\hline
+ weiter ab 1.20
+\end{tabular}
+
+\end{document}
