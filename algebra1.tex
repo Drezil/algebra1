@@ -24,6 +24,13 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{prop}{Proposition}
 
+% redifine \em for \emph to use bold instead of italics
+\makeatletter
+\DeclareRobustCommand{\em}{%
+  \@nomath\em \if b\expandafter\@car\f@series\@nil
+  \normalfont \else \bfseries \fi}
+\makeatother
+
 \begin{document}
 \newcommand{\menge}[2]{$\{\,{#1}\,\vert\,{#2}\,\}$}
 \parindent0pt
@@ -45,9 +52,7 @@ Autor: Jonas Betzendahl\\
 \tableofcontents
 \newpage
 
-\setcounter{section}{-2} % Kompensieren für Organisatorisches und Einführung
-
-\section{Organisatorisches etc.}
+\section*{Organisatorisches etc.}
 
 Dozent ist Prof. Dr. Christopher Voll\\
 \texttt{voll@math.uni-bielefeld.de}\\
@@ -70,7 +75,7 @@ Voraussetzung für die Zulassung zur Prüfung sind das Erreichen von mindestens 
 
 Übungszettel gibt es immer am Mittwoch der Woche n, bearbeiten werden müssen diese bis Mittwoch der Woche n+1 (Abgabe vor der Vorlesung im Postfach des Tutors), besprochen werden sie in der Woche n+2 in den Tutorien.
          
-\section{Algebra - die Kunst, Gleichungen zu lösen (Einführung)}
+\section*{Algebra - die Kunst, Gleichungen zu lösen (Einführung)}
 
 \underline{Lineare} Algebra:
 
@@ -925,12 +930,13 @@ Sei $R$ ein Integritätsbereich. $a \in R$.\begin{enumerate}
 \end{enumerate}
 \end{defi}
 
-\textbf{Proposition 2.28:} Sei $R$ ein Integritätsbereich derart, dass jedes $a \in R \setminus \{0\}$ eine Faktorisierung in irreduzible Elemente besitzt. Dann ist äquivalent:
+\begin{prop}[2.28] Sei $R$ ein Integritätsbereich derart, dass jedes $a \in R \setminus \{0\}$ eine Faktorisierung in irreduzible Elemente besitzt. Dann ist äquivalent:
 
 \begin{enumerate}
 \item $R$ ist faktoriell 
 \item Jedes irreduzible Element von $R$ ist prim.
 \end{enumerate}
+\end{prop}
 
 \textbf{Beweis:} \glqq $1 \Rightarrow 2$\grqq : Seien $a,b \in R \setminus \{0\}$ mit $a = e_a p_1 \dots p_r, b = e_b q_1 \dots q_s, e_a, e_b \in R^*$, $p_i, q_j$ irreduzible Elemente. Sei $p \in R$ irreduzibel mit $p \mid ab$. $p \mid \underbrace{e_a e_b \cdot p_1 \dots p_r q_1 \dots q_s}_{a \cdot b}$. Da $R$ faktoriell ist, ist $p$ assoziiert zu einem der $p_i$ oder einem der $q_j$ (d.h. $(p) = (q_j)$ oder $(p) = (p_i)$). Also $p \mid a$ oder $p \mid b$.
 
@@ -942,7 +948,64 @@ O.B.d.A. $r > 0$. $p_1 \mid e' p_1' \dots p_s'$. Es existiert also ein $j \in [s
 
 $a = e p_1 \dots p_r = e' \cdot \underbrace{c \cdot p_1}_{= p_j'} \cdot p_1' \dots \hat{p_j'} \dots p_s'$. RIB $\Rightarrow$ d.h. $e p_2 p_r = \underbrace{e' c}_{\in R^*} p_1' \dots \hat{p_j'} \dots p_s'$
 
-Rest per Induktion. $\square$
+Rest per Induktion. $\square$\\
+
+\textbf{Bemerkung:} In einem faktoriellen Ring sind alle irreduziblen Elemente prim.\\
+
+\begin{satz}[2.29]
+ Jeder Hauptidealring ist faktoriell
+\end{satz}
+\textbf{Beweis:} Sei $R$ ein Hauptidealring (insbesondere Itegritätsbereich). Nach Proposition 2.28 reicht zu zeigen:
+\begin{enumerate}
+ \item Jedes Element in $R\setminus ( R^* \cup \lbrace 0 \rbrace )$ hat eine Zerlegung in irreduzible Faktoren
+ \item Jedes irreduzible Element in $R$ ist prim.
+\end{enumerate}
+@1: Sei $r \in R \setminus ( R^* \cup \lbrace 0 \rbrace )$. Ist $r$ reduzibel, so existiert $c_1, r_1 \in R \setminus R^* : r = c_1 r_1$. Ohne Einschränkung ist $r_1$ reduzibel. Ist $r_1$ reduzibiel, so existieren $c_2, r_2 \in R \setminus R^* : r_1 = c_2 r_2$. Ist $r_2$ reduzibel, so existieren $c_3, r_3 \in R \setminus R^* : r_2 = c_3 r_3$. Terminiert dieser Prozess nicht, so existiert eine unendliche Folge von Elementen $r_1, r_2, r_3, ...$ mit $(r_1) \subsetneq (r_2) \subsetneq (r_3) \subsetneq \dots$. Beachte $I:=\bigcup_{i=1}^\infty (r_i) \triangleleft R$.\\
+$R$ ist aber Hauptidealring $\Rightarrow r_\infty \in R : i = (r_\infty)$, insbesondere $r_\infty \in I$.\\
+$\exists N : r_\infty \in (r_N)$, das heisst $I \subseteq (r_N)$. Widerspruch zur Aussage, dass $(r_N) \subsetneq (r_{N+1}) \subsetneq \dots$. Das heisst Hauptidealringe sind \textbf{noethersch} (Emmy Noether, 1882-1935).\\
+@2: Sei $p\in R$ irreduzibel. Zu zeigen: $p$ ist prim. Seien $a,b \in R$ mit $p \mid ab$ und $p \nmid b$. Zu zeigen: $p \mid b$.\\
+$I := (a,p) = \lbrace x a + y p | x,y \in R \rbrace = (r)$ für $r \in R$, da $R$ Hauptidealring ist.\\
+Es gilt natürlich $r \mid a, r \mid p$, sagen wir $p = rc$ fur ein $c \in R$. Da $p$ irreduzibel ist, dann ist entweder $r\in R^*$ oder $c \in R^*$. Ist $c \in R^*$, so gilt $(p) = (r)$. Widerspruch zu $\underbrace{p\nmid a}_{(p) \nsupseteq (a)}, \underbrace{r \mid a}_{(r) \supseteq (a)}$.\\
+Also ist $r \in R^*$ und $I = R$. Es existiert also $x,y \in R : 1 = xa + yp$.\\
+$p \mid ab \Rightarrow \exists c' \in R : pc' = ab$.\\
+$b = 1 \cdot b = (xa + yb) b = x(ab) + p (yb) = p (c'x + yb) \Rightarrow p \mid b$. $\square$\\
+\begin{korr}[2.30]
+ \begin{enumerate}
+  \item $\mathbb{Z}$ ist faktoriell : $a \in \mathbb{Z} \setminus \lbrace 0 \rbrace : a = \epsilon \prod_{p\in P} p^{v_p(a)}, v_p(a) \in \mathbb{N}_0, v_p(a) = 0$ für fast alle $p\in P$. $P$ Menge aller Primzahlen, $\epsilon \in \lbrace 1,-1\rbrace$. $v_p(a)$ sind eindeutig bestimmt. Dies nennt man auch die \glqq p-adische Bewertung von a\grqq 
+  \item $K$ Körper, $f \in K[X] \setminus \lbrace 0\rbrace $. $f = c \cdot \prod_{g \in P} g^{v_g(f)}, c \in K^*$. $P$ Repräsentatensystem der irreduziblen Polynome in $K[X]$ (Z.B. normierte irreduzible Polynome).
+ \end{enumerate}
+\end{korr}
+
+\begin{defi}[2.31]
+ Sei $R$ Integritätsbereich, $a_1, \dots, a_r \in R$, Ein Element $t\in R$ heisst \emph{gemeinsamer Teiler} (gT, common divisor) von $a_1, \dots, a_r$, wenn $t\mid a_i \forall i = 1,\dots,r$.\\
+ Ein gemeinsamer Teiler $d$ von $a_1, \dots, a_r$ heisst \emph{größter gemeinsamer Teiler} (ggT, greatest common divisor = gcd), falls $t \in R $ gemeinsamer Teiler von $a_1, \dots a_r \Rightarrow t\mid d$.\\
+ ÜA: \emph{falls} ggT $d$ existiert, so ist er eindeutig bis auf Assoziativität. Schreibe ggf. $d = ggT (a_1, \dots, a_r)$.\\
+ \textbf{Analog:} $b \in R$ heisst \emph{gemeinsames Vielfaches} (gV, common multiple) von $a_1,\dots,a_r$, falls $a_i \mid b$ für $i = 1,\dots ,r$. Ein gemeinsames Vielfaches $c \in R$ heisst \emph{kleinstes gemeinsames Vielfaches} (kgV, least common multiple) von $a_1, \dots, a_r$, falls $b \in R$ gemeinsames Vielfaches von $a_1, \dots, a_r \Rightarrow c \mid b$.\\
+ Wieder: Ggfs ist $c = kgV(a_1,\dots, a_r)$ eindeutig bis auf Assoziativität.
+\end{defi}
+\begin{prop}[2.32]
+ Sei $R$ faktoriell, $P$ Repräsentatensystem der irreduziblen Elemente $a_1,\dots, a_r \in R\setminus \lbrace 0 \rbrace$:
+ $$\forall i \in [r] : a_i = \epsilon_i \prod_{p\in P} p^{v_p(a_i)}, \epsilon_i \in R^*, v_p(a_i) \in \mathbb{N_0}, \textrm{ für fast alle } v_p(a_i) = 0$$
+ so existieren ggT und kgV von $a_1,...,a_r$ und 
+ $$ggT(a_1,\dots,a_r) = \prod_{p\in P} p^{min\lbrace v_p(a_i) | i = 1, \dots, r\rbrace} \in R$$
+ $$kgV(a_1,\dots,a_r) = \prod_{p\in P} p^{max\lbrace v_p(a_i) | i = 1, \dots, r\rbrace} \in R$$
+\end{prop}
+\textbf{Beweis:} $a \mid b \Leftrightarrow \forall p\in P : v_p(a) \le v_p(b)$. $a = \epsilon_a \prod_{p} p^{v_p(a)}, b = \epsilon_b \prod_p p^{v_p(b)} \square$.
+
+\subsection{Lokalisierungen, Quotientenkörper, Satz von Gauß}
+
+Sei $R$ Ring. $S \subseteq R$, multiplikativ abgeschlossen (Z.B. wenn R Integritätsbereich, $S = R \setminus \lbrace 0 \rbrace$ oder $\textfrak{p} \triangleleft R$ prim, sei $S = R \setminus \textfrak{p}$.\\
+Setze $M = \lbrace (a,b) | a \in R, b\in S\rbrace $. Definiere Relation
+$$(a,b) \sim (a',b') :\Leftrightarrow \exists c \in S : ab'c = a'bc \overset{R \textrm{ IB}}{\Leftrightarrow} ab' = a'b$$
+(ÜA: Diese Relation ist eine Äquivalenzrelation). Schreibe $\frac{a}{b}$ für die Äquivalenzklasse, die $(a,b)$ enthält.\\
+\textrm{Bemerkung:} $b$ ist hier nicht zwingend eine Einheit.\\
+Schreibe $S^{-1}R (= R_S) = \lbrace \frac{a}{b} | a \in R, b \in S \rbrace$.\\
+Dies ist ein Ring mit der durch \glqq Bruchrechnung\grqq \ gegebenen Operation $\frac{a}{b} + \frac{c}{d} = \frac{ad+cb}{bd}$. Homomorphismus $\varphi : R \rightarrow S^{-1}R, a \mapsto \frac{a}{1}$ \grqq Lokalisierung von R an S\grqq .\\
+\textbf{Wichtiger Spezialfall:} Wenn $R$ Integritätsbereich ist und $S = R \setminus \lbrace 0 \rbrace$.\\
+$S^{-1}R = Q(R) = \lbrace \frac{a}{b} | a,b \in R, b \neq 0 \rbrace$ \emph{Quotientenkörper} von R (field of fractions).\\
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
