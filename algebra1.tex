@@ -549,7 +549,7 @@ Sei $G$ eine Gruppe, $g \in G$. Ordnung von $g \coloneqq \vert \left< g \right> 
 \end{defi}
 
 \begin{satz}[1.29](Kleiner Satz von Fermat)
-Sei $G$ eine dnlische Gruppe, $g \in G$. Dann teilt $\vert g \vert$ die Ordnung $\vert G \vert$ und es gilt $g^{\vert G \vert} = e$.
+Sei $G$ eine endliche Gruppe, $g \in G$. Dann teilt $\vert g \vert$ die Ordnung $\vert G \vert$ und es gilt $g^{\vert G \vert} = e$.
 \end{satz}
 \textbf{Beweis:} Betrachte den Epimorphismus $\varphi: \mathbb{Z} \to \left< g \right> = H \leqslant G$, mit $\ker \varphi = m \mathbb{Z}, m \in \mathbb{N}$.
 
@@ -839,6 +839,7 @@ Idealtheoretisch formuliert: $(a) + (b) = (1) = \mathbb{Z}$ - Äquivalent zu Bé
 (Variante des) \emph{Chinesichen Restsatzes}: Eine Kongruenz modulo $a \cdot b$ ist lösbar gdw. wenn sie lösbar ist $mod (a)$ und $mod (b)$.\\
 Zum Beispiel $a = 2, b = 3$: $X^2 \equiv 5 mod (6)$ lösbar gdw. $X^2 \equiv 5 \equiv 1 mod (2)$ lösbar \emph{und} $X^2 \equiv 5 \equiv 2 mod (3)$. Letzteres ist aber nicht lösbar, also ist die Gleichung $mod (6)$ nicht lösbar.\\
 $R$ Ring $I_1, I_2 \trianglelefteq R$ koprim $:\Leftrightarrow I_1 + I_2 = R \Leftrightarrow (I_1,I_2) = 1$
+
 \begin{satz}[2.19]{Chinesischer Restsatz (Chinese Remainder Theorem (CRT))}
 Sei $R$ kommutativer Ring mit 1, $I_1, \dots, I_n$ paarweise koprime Ideale. Dann ist
 $$\varphi : R \rightarrow R/I_1 \times \dots \times R/I_n, a \mapsto (a + I_1, \dots, a + I_n)$$
@@ -851,6 +852,97 @@ Nach Voraussetzung existieren für $i \neq j$ Elemente $a_i \in I_j, a_i' \in I_
 $$1 = \prod_{i \neq j} 1 = \prod_{i \neq j} (a_i + a_i') \in I_j + \prod_{i \neq j} I_i \subseteq I_j + \bigcap_{i \neq j} I_i$$.
 
 
+ TODO: REST IN VORLESUNG VOM 10.11.
+
+\subsection{Primfaktorzerlegung}
+
+\begin{defi}[2.20]
+Ein Integritätsbereich $R$ heißt \emph{euklidisch}, falls es eine \emph{euklidische Normfunktion} $n: R\setminus\{0\} \to \mathbb{N}_0$ gibt, derart, dass $\forall a, b \in R$, mit $a \neq 0, \exists q, r : b = q a + r$, mit $r = 0$ oder $n(r) < n(a)$.
+\end{defi}
+
+\textbf{Beispiel 2.21:}\begin{enumerate}
+\item $\mathbb{Z}$ mit $n : \mathbb{Z} \setminus \{0\} \to \mathbb{N}_0, n(a) \coloneqq \vert a \vert$.
+\item Sei $K$ ein Körper, $R=K[X], n : f \mapsto \deg f$.
+\end{enumerate}
+
+\begin{satz}[2.22]
+Jeder euklidische Ring ist ein Hauptidealring.
+\end{satz}
+\textbf{Beweis:} Sei $R$ ein euklidischer Ring, $I \triangleleft R, (0) \neq I$. Es ist zu zeigen, dass $I$ ein Hauptideal.
+
+Wähle ein $a \in I \setminus \{0\}$ derart, dass $n(a)$ minimal ist. Es reicht zu zeigen, dass $I = (a).$
+
+\glqq $\supseteq$\grqq\ klar.
+
+\glqq $\subseteq$\grqq\ Sei $b \in I, b = qa + r$. Ist $r = 0$, so ist $b \in (a)$. Ist $r \neq 0$, dann ist $n(r) < n(a)$. $(r = b - qa \in I)$. Widerspruch zur Wahl von $a$. $\square$\bigskip
+
+\textbf{Notation:} Sei $R$ ein Integritätsbereich. $x,y \in R$. Schreibe \glqq $x \mid y$\grqq\ für \glqq $x$ teilt $y$\grqq ; d.h. $\exists c \in R$, $xc = y$; andernfalls \glqq $x \nmid y$\grqq .
+
+\textbf{Lemma [2.23]:} Sei $R$ ein Integritätsbereich. $x,y \in R$. Dann sind äquivalent: \begin{enumerate}
+\item $x \mid y$ und $y \mid x$
+
+\item $x$ und $y$ sind assoziiert, d.h. $\exists c \in R^*: y = xc$
+
+\item $(x) = (y)$
+\end{enumerate}
+
+\begin{defi}[2.24]
+Sei $R$ ein Integritätsbereich. Ein Element $x \in R \setminus (R^* \cup \{0\})$ heißt \begin{itemize}
+\item \emph{irreduzibel}, falls $(\forall y,z \in R. x = yz \Rightarrow (y \in R^*$ oder $z \in R^*))$
+\item \emph{prim}, falls $(\forall y, z \in R \; x \mid yz \Rightarrow x \mid y$ oder $x \mid z)$.
+\end{itemize}
+i.a.W. $(x)$ ist Primideal.
+\end{defi}
+
+\begin{satz}[2.25]
+Sei $R$ ein Hauptidealring, $x \in R \setminus (R^* \cup \{0\})$. Dann sind äquivalent:\begin{enumerate}
+\item $(x)$ ist maximal
+\item $(x)$ ist Primideal, d.h. $x$ ist prim.
+\item $x$ ist irreduzibel.
+\end{enumerate}
+\end{satz}
+\textbf{Beweis:} \begin{itemize}
+\item \glqq $1 \Rightarrow 2$\grqq : maximale Ideale sind prim. (Prop 2.17)
+\item \glqq $2 \Rightarrow 3$\grqq : $x$ prim. Sei $x = yz$. Da $x$ prim ist, gilt $x \mid y$ oder $x \mid z$. Angenommen $x \mid y$. Es existiert also $c \in R: y = cx$, also $x = czx$. Also $x(1-cz) = 0, x \neq 0, R$ ist Integritätsbereich, d.h. $1 = cz$, d.h. $z \in R^*$.
+\item \glqq $3 \Rightarrow 1$\grqq : Sei $x$ irreduzibel. Z.z.: $(x)$ ist maximal. Sei dazu $x \in (x) \subseteq I = (a) \trianglelefteq R$. Wir wissen: $x \in (a)$, es existiert also $c \in R: x = ca$. Da $x$ irreduzibel ist $c \in R^*$ oder $a \in R^*$. Wenn $c \in R^*$, so gilt $(x) = (a)$. Wenn $a \in R^*$, so gilt $(a) = R$. Also ist $(x)$ maximal 
+\end{itemize} $\square$
+
+\textbf{Bemerkung:} \glqq $1 \Leftrightarrow 2$\grqq\ gilt in allgemeinen Integritätsbereichen (nicht notwendigerweise Hauptidealringe).\bigskip
+
+\textbf{Beispiel 2.26:} Allgemein: \glqq prim $\Rightarrow$ irreduzibel\grqq . In Hauptidealringen: \glqq prim $\Leftrightarrow$ irreduzibel\grqq . Im Allgemeinen gilt \glqq irreduzibel $\Rightarrow$ prim \grqq\ nicht. Betrachte $\mathbb{Z} \hookrightarrow \mathbb{Z}[\sqrt{-5}] = $ \menge{a + b \sqrt{-5}}{a,b \in \mathbb{Z}}
+
+$g = 3 \cdot 3 = (2 + \sqrt{-5}) (2 - \sqrt{-5}).$ 
+
+\underline{Tatsache:} $3, 2 \pm \sqrt{-5}$ sind irreduzibel, $3$ ist allerdings nicht prim: $3 \mid 3^2$, aber $3 \nmid (2 \pm \sqrt{-5})$
+
+\begin{defi}[2.27]
+Sei $R$ ein Integritätsbereich. $a \in R$.\begin{enumerate}
+\item Eine \emph{Zerlegung (Faktorisierung) von $a$ in irreduzible Faktoren} ist eine Produktdarstellung der Form $a = e \cdot p_1 \cdot \dots \cdot p_r$, wobei $e \in R^*$, $p_1, \dots, p_r$ irreduzibel.
+
+\item $a$ hat eine \emph{eindeutige} Faktorisierung in irreduzible Faktoren, falls aus $a = e' \cdot p_1' \cdot \dots \cdot p_s'$ $(e' \in R^*,$ irreduzibel Element $p_i')$ folgt, dass $r =s$ und - nach eventueller Umnummerierung - $(p_i) = (p_i')$ für alle $i = 1, \dots, r$.
+
+\item Ein Integritätsbereich, in dem jedes von $0$ verschiedene Element eine \emph{eindeutige} Faktorisierung in irreduzible Elemente hat, heißt \emph{faktoriell} (factorial, unique factorization domain = UFD).
+\end{enumerate}
+\end{defi}
+
+\textbf{Proposition 2.28:} Sei $R$ ein Integritätsbereich derart, dass jedes $a \in R \setminus \{0\}$ eine Faktorisierung in irreduzible Elemente besitzt. Dann ist äquivalent:
+
+\begin{enumerate}
+\item $R$ ist faktoriell 
+\item Jedes irreduzible Element von $R$ ist prim.
+\end{enumerate}
+
+\textbf{Beweis:} \glqq $1 \Rightarrow 2$\grqq : Seien $a,b \in R \setminus \{0\}$ mit $a = e_a p_1 \dots p_r, b = e_b q_1 \dots q_s, e_a, e_b \in R^*$, $p_i, q_j$ irreduzible Elemente. Sei $p \in R$ irreduzibel mit $p \mid ab$. $p \mid \underbrace{e_a e_b \cdot p_1 \dots p_r q_1 \dots q_s}_{a \cdot b}$. Da $R$ faktoriell ist, ist $p$ assoziiert zu einem der $p_i$ oder einem der $q_j$ (d.h. $(p) = (q_j)$ oder $(p) = (p_i)$). Also $p \mid a$ oder $p \mid b$.
+
+\glqq $2 \Rightarrow 1$\grqq : Angenommen $a = e p_1 \dots p_r = e' p_1' \dots p_s'$. z.z.: $r =s$ und $(p_i) = (p_i')$ nach Umnummerierung.
+
+$e, e' \in R^*, p_i, p_j$ irreduzibel.
+
+O.B.d.A. $r > 0$. $p_1 \mid e' p_1' \dots p_s'$. Es existiert also ein $j \in [s]: p_1 \mid p_j'$. Das heißt $\exists c \in R: p_j' = P_1 c$, aber $p_i, p_j'$ irreduzibel. Das heißt $c \in R^*$. Und das wiederum heißt $(p_1) = (p_j')$.
+
+$a = e p_1 \dots p_r = e' \cdot \underbrace{c \cdot p_1}_{= p_j'} \cdot p_1' \dots \hat{p_j'} \dots p_s'$. RIB $\Rightarrow$ d.h. $e p_2 p_r = \underbrace{e' c}_{\in R^*} p_1' \dots \hat{p_j'} \dots p_s'$
+
+Rest per Induktion. $\square$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
