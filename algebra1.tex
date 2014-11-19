@@ -44,7 +44,7 @@
 Dozent: Prof. Dr. Christopher Voll\\
 \texttt{voll@math.uni-bielefeld.de   }\bigskip
 
-Autor: Jonas Betzendahl\\
+Autors: Jonas Betzendahl\\
 \texttt{jbetzend@techfak.uni-bielefeld.de}\bigskip
 \end{multicols}
 \end{center}
@@ -1002,10 +1002,80 @@ $$(a,b) \sim (a',b') :\Leftrightarrow \exists c \in S : ab'c = a'bc \overset{R \
 Schreibe $S^{-1}R (= R_S) = \lbrace \frac{a}{b} | a \in R, b \in S \rbrace$.\\
 Dies ist ein Ring mit der durch \glqq Bruchrechnung\grqq \ gegebenen Operation $\frac{a}{b} + \frac{c}{d} = \frac{ad+cb}{bd}$. Homomorphismus $\varphi : R \rightarrow S^{-1}R, a \mapsto \frac{a}{1}$ \grqq Lokalisierung von R an S\grqq .\\
 \textbf{Wichtiger Spezialfall:} Wenn $R$ Integritätsbereich ist und $S = R \setminus \lbrace 0 \rbrace$.\\
-$S^{-1}R = Q(R) = \lbrace \frac{a}{b} | a,b \in R, b \neq 0 \rbrace$ \emph{Quotientenkörper} von R (field of fractions).\\
+$S^{-1}R = Q(R) = \lbrace \frac{a}{b} | a,b \in R, b \neq 0 \rbrace$ \emph{Quotientenkörper} von R (field of fractions). ($\frac{a}{b} \sim \frac{a'}{b'}\, :\Leftrightarrow b'a = ba'$) \bigskip
 
+\textbf{Beispiel 2.34:}\begin{enumerate}
+\item $R = \mathbb{Z}, Q(\mathbb{Z}) = \mathbb{Q}$
+\item $R = \mathbb{Z}, p $ Primzahl, $S \coloneqq \mathbb{Z} \setminus (p) \rightsquigarrow S^{-1}R =$\menge{\frac{a}{b}}{a \in \mathbb{Z}, p \nmid b}
+\item $R = K[X], K$ ist ein Körper, $Q(K[X]) = K(X) =$\menge{\frac{f(x)}{g(x)}}{f,g \in K[X], g neq 0}\\
+\glqq Körper der rationalen Funktionen in $X$ über $K$\grqq
+\end{enumerate}
 
+\textbf{z.B.:} $f = X^2 + 1$. Wir wollen \glqq $f = 0$\grqq\ lösen. Gegeben Ring $R$, bestimme \menge{x \in R}{f(x) = 0}\\
+$\mathbb{Q}(i) = \mathbb{Q}(\sqrt{-1}) =$\menge{a + bi}{a,b \in \mathbb{Q}}\\
+$f \in \mathbb{Q}(i)[X]: f=(X-i)(X+i)$\bigskip
 
+Sei $R$ (für den Moment) faktioriell und $P$ Repräsentantensystem der irreduziblen Elemente von $R$ (z.B.: in $\mathbb{Z}: P = \{$ Primzahlen $\}$).
+
+$Q(R)\qquad x = \frac{a}{b} = \varepsilon \prod_{p \in P} p^{v_p(x)}$ (wobei $\varepsilon \in R^*$), $v_p(x) \in \mathbb{Z}, v_p(x) = 0$ für fast alle $p$.
+
+z.B.: $R = \mathbb{Z}, x = \frac{4}{3} = (-1) \cdot \frac{2^2}{3} = (-1) \cdot 2^2 \cdot 3^{-1} \cdot 5^0 \cdot 7^0 \dots$.
+
+Setze $v_p(0) = \infty$ für $p \in P$. $v_2(x) = 2, v_3(x) = -1$\bigskip
+
+\begin{defi}[2.35]
+$R,P$ wie oben. $f(X) = \sum_{i=0}^{\infty} a_I X^i \in Q(R)[X]$. Für $p \in P$ setze $v_p(f) \coloneqq$ min \menge{v_p(a_i)}{i \in \mathbb{N_0}} $\in \mathbb{Z} \cup \{\infty\}$. $f \in R[X]$ heißt \emph{primitiv}, falls $v_p(f) = 0$ für alle $p \in P$. 
+
+(d.h. ggT($a_0, a_1, \dots, a_n$) $=1$ ($a_i = $ von 0 verschiede Koeffizienten))
+\end{defi}
+
+\textbf{Lemma 2.36:} (Gaußsches Lemma)
+$R$ faktoriell, $P$ wie oben, $p \in P$. Dann gilt, für $f,g \in Q(R)[X]: v_p(fg) = v_p(f) + v_p(g) \quad (*)$.
+
+\textbf{Beweis:} Reduziere auf den Fall $f, g \in R[X]$, beide primitiv.
+o.B.d.A. $f,g \neq 0$. $(*)$ ist klar falls $f$ oder $g$ konstant sind (d.h. $\deg = 0$).
+
+$f(X) = \sum_i a_i X^i, a_i = \frac{c_i}{d_i}$
+
+o.B.d.A. sind aber $f,g \in R[X]$, sogar \underline{primitiv}.
+
+Rzz: $v_p(fg) = 0$.
+
+Betrachte $\varphi_p : R[X] \to R / (p) [X], \sum_{i=0}^{\infty} a_i X^i = f \mapsto \sum_{i=0}^{\infty} \bar{a_i} X^i, \bar{a_i} = a_i + (p) \in R / (p).$
+
+$\ker (\varphi_p) = $\menge{f \in R[X]}{ v_p(f) > 0} (per Definition von $v_p(f)$!)
+
+d.h. $g,f \notin \ker(\varphi_p).$
+
+$\varphi_p(fg) = \varphi_p(f) \varphi_p(g) \in R/(p) [X]$ ist ein IB!!! $\square$\bigskip
+
+\textbf{Korollar (2.37):} $R$ faktioriell. $f,g \in R[X]$ primitiv $\Rightarrow fg \in R[X]$ primitiv.
+
+\textbf{Korollar (2.38):} $R$ faktioriell, $h \in R[X]$ normiert. Wenn $h = f \cdot g$ für normierte Polynome $f,g \in Q(R)[X]$. Dann sind bereits $f,g \in R[X]$. (\glqq wenn $h$ über $Q(R)$ faktorisiert, dann schon über $R$.\grqq)
+
+\textbf{Beweis:} Für jedes $p \in P$ gilt $v_p(h) = 0$, $v_p(f), v_p(g) \leq 0$. Gauß: $v_p(h) = v_p(f) + v_p(g) = 0$.\\
+d.h.: $v_p(f) = 0 = v_p(g)$, d.h.: $f,g \in R[X]$. $\quad \square$
+
+\begin{satz}[2.39](Satz von Gauß)
+Ist $R$ faktioriell, so ist auch $R[X]$ faktoriell. Die Primelemente von $R[X]$ sind von folgender Form:\begin{enumerate}
+\item Primelemente von $R$ (betrachtet als konstante Polynome)
+\item Primitive Polynome in $R[X]$, die Primelemente in $Q(R)[X]$ sind. 
+\end{enumerate}
+
+z.B.: $R = \mathbb{Z:}$ $p$ ($p$ Primzahl), $f (= \sum_{i=0}^{\infty} a_i X^i) \in \mathbb{Z}[X]$. ggt($a_i$) = 1, $f$ irreduzibel über $\mathbb{Q}$.
+\end{satz}
+
+\textbf{Beweis:} Zeige zunächst, dass Polynome von Typ (1) und (2) prim sind.
+
+\begin{enumerate}
+\item Sei $q \in R$ prim. Z.z.: $qR[X] = (q) \triangleleft R[X]$ ("von $q$ in $R[X]$ erzeugte Hauptideal") ist prim.
+
+$R[X]/qR[X] \simeq \underbrace{R/qR}_{\text{IB!}}[X]$ -- IB als Polynomring über IB $R/qR$.
+
+\item $q \in R[X]$ primitiv, prim als Element von $Q(R)[X]$. zz.$q$ prim als Elem...
+
+Seien also $f,g \in R[X]$ mit $q \mid f \cdot g$. Da $q$ prim ist über $Q(R)$, teilt $q$ eines der beiden Polynome, etwa $f$, d.h. $\exists h \in Q(R)[X]$. $f = q \cdot h$. Lemma von Gauß: $\forall p \in P: v_p(f) = \underbrace{v_p(q)}_{=0} + v_p(h) $, d.h. $h \in R[X]$.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
