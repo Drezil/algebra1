@@ -1059,7 +1059,7 @@ d.h.: $v_p(f) = 0 = v_p(g)$, d.h.: $f,g \in R[X]$. $\quad \square$
 \begin{satz}[2.39](Satz von Gauß)
 Ist $R$ faktioriell, so ist auch $R[X]$ faktoriell. Die Primelemente von $R[X]$ sind von folgender Form:\begin{enumerate}
 \item Primelemente von $R$ (betrachtet als konstante Polynome)
-\item Primitive Polynome in $R[X]$, die Primelemente in $Q(R)[X]$ sind. 
+\item Primitive Polynome in $R[X]$, die Primelemente (=irreduzibel) in $Q(R)[X]$ sind. 
 \end{enumerate}
 
 z.B.: $R = \mathbb{Z:}$ $p$ ($p$ Primzahl), $f (= \sum_{i=0}^{\infty} a_i X^i) \in \mathbb{Z}[X]$. ggt($a_i$) = 1, $f$ irreduzibel über $\mathbb{Q}$.
@@ -1076,6 +1076,85 @@ $R[X]/qR[X] \simeq \underbrace{R/qR}_{\text{IB!}}[X]$ -- IB als Polynomring übe
 
 Seien also $f,g \in R[X]$ mit $q \mid f \cdot g$. Da $q$ prim ist über $Q(R)$, teilt $q$ eines der beiden Polynome, etwa $f$, d.h. $\exists h \in Q(R)[X]$. $f = q \cdot h$. Lemma von Gauß: $\forall p \in P: v_p(f) = \underbrace{v_p(q)}_{=0} + v_p(h) $, d.h. $h \in R[X]$.
 \end{enumerate}
+
+Nach Proposition 2.28 reicht zu zeigen: Jedes $f \in R[X] \setminus \lbrace 0 \rbrace$ ist Produkt von (Prim-)Elementen von Typ (1) oder (2) sind. Schreibe 
+$$f = \sum_{i=0}^\infty a_i X^i = \underbrace{\textrm{ggT}(a_0,a_1,...)}_{\in R} \tilde f, \tilde f\textrm{ primitiv}$$
+Zerlege $\tilde f = \epsilon \cdot \tilde f_1 \cdot ... \cdot \tilde f_r$ in irreduzible Elemente in $Q(R)[X]$. $\epsilon \in Q(R)^*, \tilde f_i \in Q(R)[X]$.\\
+OBdA sind die $\tilde f_i \in R[X]$ primitiv\footnote{kgV multiplizieren, ggT ausklammern, faktoren in $\epsilon$ packen}.\\
+Für belibige $p \in R$ prim gilt, nach Lemma von Gauß:
+$$\underbrace{v_p(\tilde f)}_{=0} = \underbrace{v_p(\epsilon)}_{\in Q(R)^*} + \underbrace{\sum_{i=1}^r v_p (\tilde f_i)}_{=0},$$
+dass heisst $v_p(\epsilon) = 0 \Rightarrow \epsilon \in R^*$.\\
+Ersetze, falls nötig $\tilde f_1$ durch $\epsilon \tilde (f_1)$. $\square$
+
+\begin{korr}[2.40]
+$R$ faktoriell, $f \in R[X]$ prim.\\
+$$f \textrm{ irreduzibel über }R[X] \Leftrightarrow f \textrm{ irreduzibel über } Q(R)[X]$$
+\end{korr}
+
+\subsection{Irreduzibilitätskriterien}
+Sei $R$ faktoriell, $f \in Q(R)[X]$, $f = \epsilon \tilde f$, $\epsilon \in Q(R)^*, \tilde f \in R[X] primitiv$
+\begin{satz}[2.41]
+Sei $f \in R[X]$ primitiv, $p \in R$ prim. Angenommen, dass der Leitkoeffizient von $f$ nicht durch $p$ teilbar ist. Bezeichne mit
+$$\varphi: R[X] \rightarrow R/(p)[X], \sum_i a_i X^i \mapsto \sum_i \bar{a_i} X^i$$
+\glqq Reduktion modulo p\grqq . Wenn $\varphi(t)$ irreduzibel ist in $R/(p)[X]$, dann ist $f$ irreduzibel.
+\end{satz}
+Beweis: Übungsaufgabe: (\glqq $\exists p : \bar{f}$ irreduzibel $\Rightarrow f$ irreduzibel\grqq $\leftrightarrow$ \glqq $f$ reduzibel$/R \Rightarrow \forall p : \bar{f}$ reduzibel \grqq )\\
+Bemerkung: Dieses Kriterium ist hinreichend für irreduzibilität, aber nicht notwendig:\\
+$\exists f \in \mathbb{Z}[X] : f\textrm{ irreduzibel, normiert }$, die reduzibel werden, nach Reduktion mod p für alle Primzahlen $p \in \mathbb{Z}$.\\
+Z.B.: $X^4 + 1 \in \mathbb{Z}[X]$ oder $X^4 - 10X^2 + 1$.
+\begin{satz}[2.42] (Eisensteinsches Irreduzibilitätskriterium)
+Sei $R$ faktoriell, $f = \sum_{i=0}^\infty a_i X^i \in R[X]$ primitiv, $\textrm{deg }f = n > 0$. Sei $p \in R$ ein Primelement derart, dass
+$$p \nmid a_n, p \mid a_i, i \in \lbrace {0,\dots,n-1}, p^2 \nmid a_0$$
+Dann ist $f$ irreduzibel
+\end{satz}
+Zum Beispiel: $X^7 + \underbrace{48}_{3 \cdot 2^4} X - \underbrace{24}_{3 \cdot 2^3} \in \mathbb{Z}[X]$. Mit $p = 3$ ist dies nach Eisenstein irreduzibel.\\
+Bemerkung: Manchmal bietet es sich an statt $f(x)$ sich $f(x+c)$ anzusehen. Hierbei ändern sich die Koeffizienten hin und wieder, damit es danach mit Eisenstein klappt.\\
+\textbf{Beweis:} (durch Widerspruch):
+Angenommen $f$ sei reduzibel, somit $f = g h, f = \sum_{i=0}^n a_i X^i, g=\sum_{i = 0}^r b_i X^i, h = \sum_{i=0}^s c_i X^i, \textrm{ deg} g = r > 0, \textrm{ deg} h = s > 0$.\\
+\begin{itemize}
+ \item Leitkoeffizient von $f$: $a_n = b_r \cdot c_s \neq 0$, insbesondere $p \nmid b_r, p \nmid c_s$.
+ \item Konstantterm von $f$: $a_0 = b_0 \cdot c_0 \equiv 0 mod (p) \not\equiv 0 mod (p^2)$, etwa $p \mid b_0, p \nmid c_0$.
+\end{itemize}
+Setze $t = max \lbrace i \in [0..r-1] | p \mid b_i \forall j \le i \rbrace$, insbesondere $p \nmid b_{t+1}$.\\
+Betrachte $a_t+1 = \underbrace{b_0 c_{t+1} + b_1 c_t + ... + b_t c_1}_{\equiv 0 mod (p)} + b_{t+1} c_0 \not\equiv 0 mod (p)$. Das heisst, $n = t+1$, also $t = n-1 \Rightarrow n = r$. Widerspruch zu $s > 0$.
+$\square$\\
+
+Beispiel 2.43: Sei $p$ eine Primzahl. Betrachte
+$$X^p - 1 = (X-1) (X^{p-1} + X^{p-2} + ... + X^2 + X + 1)$$
+Behauptung: $\underbrace{X^{p-1} + X^{p-2} + ... + X^2 + X + 1}_{\Phi_p\textrm{ \glqq zyklotonisches Polynom\grqq}} \in \mathbb{Z}[X]$ ist irreduzibel.\\
+Beweis: $\Phi(X) = \frac{X^p - 1}{X-1} \in \mathbb{Q}(X)$. $\Phi_p(X+1) = \frac{(X+1)^p - 1}{(X+1)-1} = \frac{\sum_{i=0}^p \binom{p}{i} X^i - 1}{X} = X^{p-1} + \binom{p}{1} X^{p-2} + ... + \underbrace{\binom{p}{p-1}}_{=p}$\\
+Nach Eisenstein sind nun alle Koeffizienten durch $p$ teilbar, aber der letzte ist nicht durch $p^2$ teilbar.
+
+\section{Fundamente der Körpertherorie}
+\begin{defi}[3.1]
+Sei $K$ ein Integritätsbereich, $\varphi: \mathbb{Z} \rightarrow K, 1 \mapsto 1$, $n \in N : \varphi(n) = \underbrace{1 + ... + 1}_{n mal}$\\
+$\ker(\varphi) \lhd \mathbb{Z}, \mathbb{Z}/\ker(\varphi) \cong \textrm{im}(\varphi) \le K$, das heisst
+$$\ker(\varphi) = \begin{cases}(0)\textrm{ falls } |\textrm{im}(\varphi)| = \infty\\ (p) \textrm{ p prim, falls } |\textrm{im}(\varphi)| = p\end{cases}$$
+Sage, dass K \glqq Charakteristik p\grqq \ hat, wobei $p=0$ oder eine Primzahl ist. Schreibe \glqq$\textrm{char}(K) = p$\grqq
+\end{defi}
+Beispiel: $\mathbb{Q},\mathbb{R},\mathbb{C},\mathbb{Z}$ Charakteristik 0, $\mathbb{Z}/(p) := \mathbb{F}_p, \mathbb{F}_p(t)$ - Charakteristik $p > 0$.\\
+\bigskip
+Ab jetzt $K$ Körper, mit Teilkörper $M \subseteq K$. Klar: $\textrm{char}(M) = \textrm{char}(K)$.\\
+Setze $P := \bigcap_{M\textrm{ Teilkörper }K} M$ - Teilkörper von K mit $\textrm{char}(P) = \textrm{char}(K)$, P Primkörper von K
+\begin{prop}[3.2]
+Sei $K$ Körper mit Primkörper $P$
+\begin{enumerate}
+ \item $\textrm{char} K = 0 \Leftrightarrow P \cong \mathbb{Q}$
+ \item $\textrm{char} K = p > 0 \Leftrightarrow P \cong \mathbb{F}_p$
+\end{enumerate}
+\end{prop}
+
+Beweis: \glqq $\Rightarrow$ \grqq : $char \mathbb{Q} = 0, char \mathbb{F}_p = p$.\\
+\glqq $\Leftarrow$\grqq : Betrachte $\varphi: Z \rightarrow K, \textrm{im}(\varphi) \subseteq P$. Ist $char K = p > 0$, so gilt $im(\varphi) \cong \mathbb{Z}/(p) = \mathbb{F}_p$, also ist $P \cong \mathbb{F}_p$. Ist $char K = 0$, so ist $im(\varphi) \cong \mathbb{Z}$, das heisst $P$ hat einen zu $\mathbb{Q} = Q(Z)$ isomorphen Teilkörper, d.h. $P \cong \mathbb{Q}$
+
+\begin{defi}[3.3]
+Sei $K \subseteq L$ \emph{Körpererweiterung} (das heisst $K$ Teilkörper von $L$) (geschrieben L/K - kein Quotient!).\\
+$[L:K] = dim_K L$ \emph{Grad von L über K} (kein Index!).\\
+$L/K$ heisst \emph{endlich}, falls $[L:K] < \infty$, ansonsten \emph{unendlich}.
+\end{defi}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
